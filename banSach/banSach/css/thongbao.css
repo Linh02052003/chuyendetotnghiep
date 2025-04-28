@@ -1,0 +1,43 @@
+﻿.alert-box {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	min-width: 250px;
+	padding: 12px 18px;
+	border-radius: 8px;
+	color: white;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	z-index: 9999;
+}
+
+	.alert-box.success {
+		background-color: #26ca26; /* Light green tone */
+		color: #fbfefb; /* Đậm hơn cho chữ dễ đọc */
+	}
+
+	.alert-box.error {
+		background-color: #dc3545;
+	}
+
+	.alert-box .icon {
+		font-weight: bold;
+		font-size: 18px;
+	}
+
+	.alert-box .close-btn {
+		background: none;
+		border: none;
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+		cursor: pointer;
+		margin-left: auto;
+	}
+
+		.alert-box .close-btn:hover {
+			color: #ddd;
+		}

@@ -1,0 +1,71 @@
+﻿@model banSach.Models.Sach
+@using System.Globalization
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container my-5">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h4 class="mb-1">Tên sách: @Html.DisplayFor(model => model.TenSach)</h4>
+            <br />
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="fw-bold">Hình</span><br />
+                    @if (!string.IsNullOrEmpty(Model.Hinh))
+                    {
+                        <img src="@Url.Content("~/img/sach/" + Model.Hinh)" alt="Logo" style="max-width: 100px; max-height: 100px;" />
+                    }
+                    else
+                    {
+                        <span>Không có hình ảnh</span>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <span class="fw-bold">Giá bán</span><br />
+                    @String.Format(CultureInfo.GetCultureInfo("vi-VN"), "{0:c0}", Model.GiaBan)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="fw-bold">Mô tả</span><br />
+                    @Html.DisplayFor(model => model.MoTa)
+                </div>
+                <div class="col-md-6">
+                    <span class="fw-bold">Ngày nhập</span><br />
+                    @Html.DisplayFor(model => model.NgayNhapHang)
+                </div>
+            </div>
+
+            <br />
+            <p class="mb-1">
+                <span class="fw-bold">Số lượng tồn</span><br />
+                @Html.DisplayFor(model => model.SoLuongTon)
+            </p>
+            <br />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="fw-bold">Tên loại sách</span><br />
+                    @Html.DisplayFor(model => model.Loai.TenLoai)
+                </div>
+                <div class="col-md-6">
+                    <span class="fw-bold">Tên nhà xuất bản</span><br />
+                    @Html.DisplayFor(model => model.NhaXuatBan.TenNXB)
+                </div>
+            </div>
+
+
+        </li>
+    </ul>
+    <div class="my-4" style="width: 100%">
+        <div class="m-auto">
+            @Html.ActionLink("Sửa Thông Tin", "Edit", null, new { id = Model.MaSach }, new { @class = "btn btn-primary btn-lg" })
+            @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-primary btn-lg" })
+        </div>
+    </div>
+</div>

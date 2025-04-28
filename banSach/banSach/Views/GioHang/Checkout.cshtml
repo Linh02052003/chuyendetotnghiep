@@ -1,0 +1,77 @@
+﻿@model List<banSach.Models.ChiTietGioHang>
+@{
+    ViewBag.Title = "Xác nhận đơn hàng";
+    var kh = ViewBag.KhachHang as banSach.Models.KhachHang;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Xác nhận đơn hàng</h2>
+
+<h4>Thông tin khách hàng</h4>
+<table class="table table-bordered">
+    <tr><th>Họ tên</th><td>@kh.HoTen</td></tr>
+    <tr><th>Số điện thoại</th><td>@kh.SoDienThoai</td></tr>
+    <tr><th>Email</th><td>@kh.Email</td></tr>
+    <tr><th>Địa chỉ</th><td>@kh.DiaChi</td></tr>
+</table>
+
+<h4 class="mt-4">Danh sách sản phẩm</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Sách</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            decimal tongTien = 0;
+        }
+        @foreach (var item in Model)
+        {
+            var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
+            tongTien += thanhTien;
+            <tr>
+                <td>@item.Sach.TenSach</td>
+                <td>@item.SoLuong</td>
+                <td>@String.Format("{0:#,##0} đ", item.DonGia)</td>
+                <td>@String.Format("{0:#,##0} đ", thanhTien)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3" class="text-right font-weight-bold">Tổng tiền:</td>
+            <td class="text-danger font-weight-bold">@String.Format("{0:#,##0} đ", tongTien)</td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+<div class="row mt-4 align-items-center">
+    <!-- Cột 1: Phương thức thanh toán -->
+    <div class="col-md-6">
+        <label for="PhuongThucThanhToan" class="font-weight-bold d-block">Phương thức thanh toán</label>
+        <select name="PhuongThucThanhToan" id="PhuongThucThanhToan" class="form-control w-75" required>
+            <option value="3">Thanh toán khi nhận hàng</option>
+            <option value="4">Chuyển khoản trước khi nhận hàng</option>
+        </select>
+    </div>
+
+    <!-- Cột 2: 2 nút điều hướng -->
+    <div class="col-md-6 text-right">
+        
+    </div>
+</div>
+
+<!-- Row for the "Xác nhận đặt hàng" button -->
+<div class="row mt-2">
+    <div class="col-md-12 text-right">
+        <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary mr-2">Quay lại giỏ hàng</a>
+    
+        <a href="@Url.Action("DatHang", "GioHang")" class="btn btn-primary">Xác nhận đặt hàng</a>
+    </div>
+</div>
+
+

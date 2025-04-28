@@ -1,0 +1,81 @@
+﻿@model IEnumerable<banSach.Models.NhanVien>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert-box success" id="success-alert">
+                <span class="icon">✔</span>
+                <span>@TempData["SuccessMessage"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert-box error" id="error-alert">
+                <span class="icon">✖</span>
+                <span>@TempData["ErrorMessage"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+    </div>
+    <div class="container-fluid px-4">
+        <br />
+        <h2>Danh sách nhân viên</h2>
+
+        <div class="my-3">
+            @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="datatablesSimple" class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Mã nhân viên</th>
+                            <th>Tên nhân viên</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Chức vụ</th>
+                            <th style="width: 150px;">Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.MaNhanVien)</td>
+                                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+                                <td>@Html.DisplayFor(modelItem => item.SoDienThoai)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ChucVu.TenCV)</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="@Url.Action("Edit", new { id = item.MaNhanVien })" title="Sửa">
+                                            <i class="fa-solid fa-lg fa-pen-to-square"></i>
+                                        </a>
+                                        <div class="ms-2"></div>
+                                        <a href="@Url.Action("Details", new { id = item.MaNhanVien })" title="Chi tiết">
+                                            <i class="fa-solid fa-lg fa-circle-info"></i>
+                                        </a>
+                                        <div class="ms-2"></div>
+                                        <a href="@Url.Action("Delete", new { id = item.MaNhanVien })" title="Xóa">
+                                            <i class="fa-regular fa-lg fa-trash-can"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+

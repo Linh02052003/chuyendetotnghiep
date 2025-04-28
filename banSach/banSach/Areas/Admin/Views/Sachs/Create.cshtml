@@ -1,0 +1,112 @@
+﻿@model banSach.Models.Sach
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "Sachs", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Thêm mới sách</h3>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label fw-bold">Tên sách</label>
+                                    @Html.EditorFor(model => model.TenSach, new { htmlAttributes = new { @class = "form-control form-control-lg" } })
+                                    @Html.ValidationMessageFor(model => model.TenSach, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12  mb-4">
+                                <div class="form-outline">
+                                    <label class="form-label fw-bold">Mô Tả</label>
+                                    @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control form-control-lg", @rows = "5" })
+                                    @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+                                <div class="form-outline datepicker w-100">
+                                    <label class="form-label fw-bold">Số Lượng Tồn</label>
+                                    @Html.EditorFor(model => model.SoLuongTon, new { htmlAttributes = new { @class = "form-control form-control-lg" } })
+                                    @Html.ValidationMessageFor(model => model.SoLuongTon, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+                                <div class="form-outline datepicker w-100">
+                                    <label class="form-label fw-bold">Ảnh</label>
+                                    <input type="file" name="Hinhanh" id="Hinhanh" class="form-control form-control-lg" />
+                                    @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger mt-1" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+                                <div class="form-outline datepicker w-100">
+                                    <label class="form-label fw-bold">Giá Bán</label>
+                                    @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control form-control-lg" } })
+                                    @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+                                <div class="form-outline datepicker w-100">
+                                    <label class="form-label fw-bold">Ngày Nhập</label>
+                                    @Html.TextBoxFor(model => model.NgayNhapHang, new { @class = "form-control", @type = "date" })
+                                    @Html.ValidationMessageFor(model => model.NgayNhapHang, "", new { @class = "text-danger mt-1" })
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+                                <div class="form-outline datepicker w-100">
+                                    <label class="form-label fw-bold">Loại sách</label>
+                                    @Html.DropDownListFor(model => model.MaLoai, (SelectList)ViewBag.MaLoai, "-- Chọn loại sách --", new { @class = "form-control form-control-lg" })
+                                    @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline datepicker w-100">
+                                    <label class="form-label fw-bold">Nhà xuất bản</label>
+                                    @Html.DropDownListFor(model => model.MaNXB, (SelectList)ViewBag.MaNXB, "-- Chọn nhà xuất bản --", new { @class = "form-control form-control-lg" })
+                                    @Html.ValidationMessageFor(model => model.MaNXB, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div style="width: 100%">
+                            <div class="m-auto">
+                                <input class="btn btn-primary btn-lg" type="submit" value="Thêm" />
+                                @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-primary btn-lg" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+}

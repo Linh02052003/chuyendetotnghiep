@@ -1,0 +1,224 @@
+﻿@model banSach.Models.KhachHang
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .register-container {
+        max-width: 600px; /* Tăng chiều rộng để chứa label và input trên cùng hàng */
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 15px; /* Khoảng cách giữa label và input */
+    }
+
+        .form-group label {
+            flex: 0 0 150px; /* Label chiếm chiều rộng cố định */
+            font-weight: bold;
+            text-align: right; /* Căn phải label */
+        }
+
+        .form-group .input-container {
+            flex: 1; /* Input chiếm phần còn lại */
+            position: relative; /* Để định vị con mắt */
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group .text-danger {
+            font-size: 14px;
+            color: red;
+            margin-top: 5px;
+            text-align: left; /* Căn trái lỗi */
+        }
+
+        .form-group .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: #ff6f00; /* Màu cam từ layout */
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .form-group .btn-primary:hover {
+                background: #e65c00;
+            }
+
+    .toast-error {
+        color: red;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .alert-success {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+        .password-container input {
+            padding-right: 40px; /* Chừa chỗ cho con mắt */
+        }
+
+        .password-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+        }
+
+    /* Đảm bảo nút Đăng Ký căn giữa */
+    .submit-group {
+        justify-content: center;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+        .register-link a {
+            color: #ff6f00;
+            text-decoration: none;
+        }
+
+            .register-link a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="register-container">
+    <h2 style="text-align: center; margin-bottom: 30px;">Đăng Ký Tài Khoản</h2>
+
+
+
+    @using (Html.BeginForm("Index", "DangKy", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HoTen, "Họ và Tên")
+            <div class="input-container">
+                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { placeholder = "Nhập họ và tên" } })
+                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgaySinh, "Ngày Sinh")
+            <div class="input-container">
+                @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { type = "date", placeholder = "Chọn ngày sinh" } })
+                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, "Email")
+            <div class="input-container">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Nhập email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DiaChi, "Địa Chỉ")
+            <div class="input-container">
+                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { placeholder = "Nhập địa chỉ" } })
+                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoDienThoai, "Số Điện Thoại")
+            <div class="input-container">
+                @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { placeholder = "Nhập số điện thoại" } })
+                @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MatKhau, "Mật Khẩu")
+            <div class="input-container password-container">
+                @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { type = "password", placeholder = "Nhập mật khẩu", id = "password" } })
+                <i class="bx bx-show toggle-password" id="togglePassword"></i>
+                @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ConfirmPassword">Nhập Lại Mật Khẩu</label>
+            <div class="input-container password-container">
+                <input type="password" name="ConfirmPassword" id="confirmPassword" placeholder="Nhập lại mật khẩu" class="form-control" />
+                <i class="bx bx-show toggle-password" id="toggleConfirmPassword"></i>
+            </div>
+        </div>
+
+
+
+        <div class="form-group submit-group">
+            <input type="submit" value="Đăng Ký" class="btn-primary" />
+        </div>
+        <div class="register-link">
+            <p>Bạn đã có tài khoản? <a href="@Url.Action("Index", "Dangnhap")">Đăng nhập</a></p>
+        </div>
+    }
+</div>
+
+<script>
+    // Xử lý hiển thị/ẩn mật khẩu
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const icon = this;
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('bx-show');
+            icon.classList.add('bx-hide');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('bx-hide');
+            icon.classList.add('bx-show');
+        }
+    });
+
+    // Xử lý hiển thị/ẩn xác nhận mật khẩu
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const icon = this;
+        if (confirmPasswordInput.type === 'password') {
+            confirmPasswordInput.type = 'text';
+            icon.classList.remove('bx-show');
+            icon.classList.add('bx-hide');
+        } else {
+            confirmPasswordInput.type = 'password';
+            icon.classList.remove('bx-hide');
+            icon.classList.add('bx-show');
+        }
+    });
+</script>

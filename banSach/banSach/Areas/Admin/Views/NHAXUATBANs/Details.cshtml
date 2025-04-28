@@ -1,0 +1,29 @@
+﻿@model banSach.Models.NhaXuatBan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container my-5">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h4 class="mb-1">Tên nhà xuất bản: @Html.DisplayFor(model => model.TenNXB)</h4>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="fw-bold">Địa chỉ</span><br />
+                    @Html.DisplayFor(model => model.DiaChi)
+                </div>
+
+            </div>
+
+        </li>
+    </ul>
+    <div class="my-4" style="width: 100%">
+        <div class="m-auto">
+            @Html.ActionLink("Sửa Thông Tin", "Edit", null, new { id = Model.MaNXB }, new { @class = "btn btn-primary btn-lg" })
+            @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-primary btn-lg" })
+        </div>
+    </div>
+</div>

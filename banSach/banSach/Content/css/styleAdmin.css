@@ -1,0 +1,81 @@
+﻿.background-img {
+    background-image: url('https://statics.vinpearl.com/styles/banner/public/2021_06/banner_nt_pc_1624243999.jpg.webp?itok=Ak-6ZWku');
+    height: 550px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-left: 30px;
+}
+
+    .background-img h1 {
+        padding-top: 100px;
+        color: white;
+        font-size: 55px;
+    }
+
+    .background-img h2 {
+        color: white;
+        font-size: 35px;
+    }
+
+    .background-img p {
+        color: white;
+        font-size: 25px;
+    }
+
+.service-container {
+    margin-top: 50px;
+}
+
+.service-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+    .service-card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .service-card img {
+        border-radius: 5px 5px 0 0;
+        object-fit: cover;
+        height: 200px;
+        width: 100%;
+    }
+
+.service-card-body {
+    padding: 10px;
+}
+
+.service-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.service-card-text {
+    font-size: 16px;
+    text-align: justify;
+    height: 80px;
+    overflow: hidden;
+}
+
+.service-card-footer {
+    text-align: center;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+}
+
+.service-btn-primary {
+    background-color: #FF9900;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+    .service-btn-primary:hover {
+        background-color: #FFCC66;
+    }

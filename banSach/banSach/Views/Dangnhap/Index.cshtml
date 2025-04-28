@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .login-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+        .form-group label {
+            flex: 0 0 150px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .form-group .input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: #ff6f00;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .form-group .btn-primary:hover {
+                background: #e65c00;
+            }
+
+    .toast-error {
+        color: red;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .alert-success {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+        .password-container input {
+            padding-right: 40px;
+        }
+
+        .password-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+        }
+
+    .submit-group {
+        justify-content: center;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+        .register-link a {
+            color: #ff6f00;
+            text-decoration: none;
+        }
+
+            .register-link a:hover {
+                text-decoration: underline;
+            }
+    .icon {
+        font-weight: bold;
+        font-size: 18px;
+    }
+</style>
+
+<div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert-box success" id="success-alert">
+            <span class="icon">✔</span>
+            <span>@TempData["Success"]</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    }
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert-box error" id="error-alert">
+            <span class="icon">✖</span>
+            <span>@TempData["Message"]</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    }
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert-box error" id="error-alert">
+            <span class="icon">✖</span>
+            <span>@ViewBag.Message</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    }
+</div>
+
+<div class="login-container">
+    <h2 style="text-align: center; margin-bottom: 30px;">Đăng Nhập</h2>
+
+    
+
+    @using (Html.BeginForm("Index", "Dangnhap", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label for="Username">Số Điện Thoại hoặc Email</label>
+            <div class="input-container">
+                <input type="text" name="Username" id="Username" placeholder="Nhập số điện thoại hoặc email" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Password">Mật Khẩu</label>
+            <div class="input-container password-container">
+                <input type="password" name="Password" id="Password" placeholder="Nhập mật khẩu" class="form-control" />
+                <i class="bx bx-show toggle-password" id="togglePassword"></i>
+            </div>
+        </div>
+
+        <div class="form-group submit-group">
+            <input type="submit" value="Đăng Nhập" class="btn-primary" />
+        </div>
+
+        <div class="register-link">
+            <p>Bạn chưa có tài khoản? <a href="@Url.Action("Index", "Dangky")">Đăng ký</a></p>
+            <p><a href="@Url.Action("ForgotPassword", "Dangnhap")">Quên mật khẩu?</a></p>
+        </div>
+    }
+</div>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('Password');
+        const icon = this;
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('bx-show');
+            icon.classList.add('bx-hide');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('bx-hide');
+            icon.classList.add('bx-show');
+        }
+    });
+</script>

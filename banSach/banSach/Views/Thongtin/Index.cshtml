@@ -1,0 +1,216 @@
+﻿@model banSach.Models.KhachHang
+@{
+    ViewBag.Title = "Thông Tin Cá Nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .profile-container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+        .form-group label {
+            flex: 0 0 150px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .form-group .input-container {
+            flex: 1;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: #ff6f00;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .form-group .btn-primary:hover {
+                background: #e65c00;
+            }
+
+    .submit-group {
+        justify-content: center;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .change-password-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+        .change-password-link a {
+            color: #ff6f00;
+            text-decoration: none;
+        }
+
+            .change-password-link a:hover {
+                text-decoration: underline;
+            }
+
+    .alert-box {
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .alert-box.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .alert-box.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-box .close-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+</style>
+
+<div class="profile-container">
+    <ul class="nav nav-tabs" id="profileTab">
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("Index", "Thongtin")" data-toggle="tab">Thông Tin Cá Nhân</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("DonHang", "Thongtin")" data-toggle="tab">Đơn Hàng Đã Mua</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" style="margin-top: 20px;">
+        <div class="tab-pane fade show active" id="thongtin">
+            <h4 style="text-align: center; margin-bottom: 30px;">Thông Tin Cá Nhân</h4>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert-box success" id="success-alert">
+                    <span class="icon">✔</span>
+                    <span>@TempData["SuccessMessage"]</span>
+                    <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+                </div>
+            }
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert-box error" id="error-alert">
+                    <span class="icon">✖</span>
+                    <span>@TempData["ErrorMessage"]</span>
+                    <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+                </div>
+            }
+
+            @using (Html.BeginForm("Edit", "Thongtin", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.MaKH)
+
+                <div class="form-group">
+                    <label for="HoTen">Họ Tên</label>
+                    <div class="input-container">
+                        @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", placeholder = "Nhập họ tên" })
+                        @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="SoDienThoai">Số Điện Thoại</label>
+                    <div class="input-container">
+                        @Html.TextBoxFor(model => model.SoDienThoai, new { @class = "form-control", placeholder = "Nhập số điện thoại", type = "tel" })
+                        @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <div class="input-container">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Nhập email", type = "email" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DiaChi">Địa Chỉ</label>
+                    <div class="input-container">
+                        @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control", placeholder = "Nhập địa chỉ" })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="NgaySinh">Ngày Sinh</label>
+                    <div class="input-container">
+                        <input type="date" class="form-control" name="NgaySinh" id="NgaySinh"
+                               value="@(Model.NgaySinh.HasValue ? Model.NgaySinh.Value.ToString("yyyy-MM-dd") : "")" />
+                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group submit-group">
+                    <input type="submit" value="Cập Nhật" class="btn-primary" />
+                </div>
+
+                <div class="change-password-link">
+                    <p>Thay đổi mật khẩu? <a href="@Url.Action("DoiMatKhau", "Thongtin")">Đổi mật khẩu</a></p>
+                </div>
+            }
+        </div>
+
+        
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+<script>
+    // Validate date of birth
+    document.getElementById('NgaySinh').addEventListener('change', function () {
+        var date = new Date(this.value);
+        if (isNaN(date) || date > new Date()) {
+            this.setCustomValidity('Vui lòng chọn ngày sinh hợp lệ và không lớn hơn ngày hiện tại.');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+</script>

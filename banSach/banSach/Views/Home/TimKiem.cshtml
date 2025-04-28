@@ -1,0 +1,69 @@
+﻿@model List<banSach.Models.Sach>
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+    var loaiList = ViewBag.LoaiList as List<banSach.Models.Loai>;
+    var searchKey = ViewBag.SearchKey as string;
+}
+
+<div class="container my-4">
+  
+    <!-- Hiển thị kết quả tìm kiếm -->
+    <div class="col-12 mt-4">
+        @if (!string.IsNullOrEmpty(searchKey))
+        {
+            <h4>Kết quả tìm kiếm cho: "@Html.Encode(searchKey)"</h4>
+        }
+        else
+        {
+            <h4>Vui lòng nhập từ khóa tìm kiếm</h4>
+        }
+
+        @if (Model == null || Model.Count == 0)
+        {
+            <p class="text-muted">Không tìm thấy sách nào phù hợp với từ khóa.</p>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var sach in Model)
+                {
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })">
+                                    <img class="default-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach" style="width: 100%; height: 200px; object-fit: cover;">
+                                    <img class="hover-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach" style="width: 100%; height: 200px; object-fit: cover;">
+                                </a>
+                                <div class="button-head">
+                                    <div class="product-action">
+                                        <a data-toggle="modal" data-target="#exampleModal" title="Xem thông tin" href="@Url.Action("Details", "Book", new { id = sach.MaSach })">
+                                            <i class="bx bx-show"></i><span>Xem nhanh</span>
+                                        </a>
+                                    </div>
+                                    <div class="product-action-2">
+                                        <a href="@Url.Action("ThemGiohang", "GioHang", new { iMasach = sach.MaSach, strURL = Request.Url.ToString() })">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-content text-center">
+                                <h3>
+                                    <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })" class="product-title">@sach.TenSach</a>
+                                </h3>
+                                <div class="product-price">
+                                    @if (sach.SoLuongTon != 0 && sach.SoLuongTon != null)
+                                    {
+                                        <span class="price">@String.Format("{0:#,##0}", sach.GiaBan) VNĐ</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="out-of-stock">Hết Hàng</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

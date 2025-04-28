@@ -1,0 +1,97 @@
+﻿@model banSach.ViewModels.TacGiaModel
+
+@{
+    ViewBag.Title = "Chỉnh sửa tác giả";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4">Sửa thông tin tác giả</h3>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(m => m.MaTG)
+
+                            <!-- Tên Tác Giả -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-bold">Tên Tác Giả</label>
+                                    @Html.TextBoxFor(m => m.TenTG, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.TenTG, "", new { @class = "text-danger" })
+                                </div>
+
+                                <!-- Địa Chỉ -->
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-bold">Địa Chỉ</label>
+                                    @Html.TextBoxFor(m => m.DiaChi, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.DiaChi, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- Điện Thoại -->
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-bold">Điện Thoại</label>
+                                    @Html.TextBoxFor(m => m.DienThoai, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.DienThoai, "", new { @class = "text-danger" })
+                                </div>
+
+                                <!-- Tiểu Sử -->
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-bold">Tiểu Sử</label>
+                                    @Html.TextAreaFor(m => m.TieuSu, new { @class = "form-control", rows = 5 })
+                                    @Html.ValidationMessageFor(m => m.TieuSu, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <hr />
+                            <h5 class="mb-3">Chọn sách đã viết</h5>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Chọn</th>
+                                            <th>Tên Sách</th>
+                                            <th>Vai Trò</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.Saches.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.CheckBoxFor(m => m.Saches[i].DuocChon)
+                                                    @Html.HiddenFor(m => m.Saches[i].MaSach)
+                                                    @Html.HiddenFor(m => m.Saches[i].TenSach)
+                                                </td>
+                                                <td>@Model.Saches[i].TenSach</td>
+                                                <td>
+                                                    @Html.TextBoxFor(m => m.Saches[i].VaiTro, new { @class = "form-control" })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <input type="submit" value="Lưu thay đổi" class="btn btn-primary btn-lg" />
+                                @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-secondary btn-lg ms-2" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

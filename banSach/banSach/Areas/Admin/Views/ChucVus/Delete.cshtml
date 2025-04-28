@@ -1,0 +1,22 @@
+﻿@model banSach.Models.ChucVu
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <br />
+    <h3>Bạn có chắc chắn muốn xóa chức vụ này không?</h3>
+    <br />
+    <p><span class="fw-bold">Tên chức vụ</span><br /> <span>@Html.DisplayFor(model => model.TenCV)</span></p>
+
+    @using (Html.BeginForm("Delete", "ChucVus", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="m-auto">
+            <input class="btn btn-primary btn-lg" type="submit" value="Xoá" />
+            @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-primary btn-lg" })
+        </div>
+    }
+</div>

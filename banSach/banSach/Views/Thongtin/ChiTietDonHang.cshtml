@@ -1,0 +1,134 @@
+﻿@model List<banSach.Models.ChiTietDonHang>
+@{
+    ViewBag.Title = "Chi Tiết Đơn Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .order-detail-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .order-table th,
+        .order-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .order-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .order-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+    .alert-box {
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+        .alert-box.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+    .product-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        margin: 2px;
+    }
+
+    .order-info {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+        .order-info span {
+            font-weight: bold;
+        }
+</style>
+
+<div class="order-detail-container">
+    <ul class="nav nav-tabs" id="profileTab">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Index", "Thongtin")">Thông Tin Cá Nhân</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("DonHang", "Thongtin")">Đơn Hàng Đã Mua</a>
+        </li>
+    </ul>
+
+    <h4 style="text-align: center; margin: 30px 0;">Chi Tiết Đơn Hàng</h4>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert-box error">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert-box error">
+            Không có chi tiết đơn hàng để hiển thị.
+        </div>
+    }
+    else
+    {
+        <div class="order-info">
+            <p><span>Mã Đơn Hàng:</span> @ViewBag.MaDonHang</p>
+            <p><span>Ngày Đặt:</span> @(ViewBag.NgayDat?.ToString("dd/MM/yyyy") ?? "Chưa có ngày")</p>
+            <p><span>Trạng Thái:</span> @ViewBag.TrangThai</p>
+            <p><span>Tổng Tiền:</span> @String.Format("{0:N0} đ", ViewBag.TongTien)</p>
+        </div>
+
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Hình Ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (@item.Sach?.Hinh != null)
+                            {
+                                <img src="/img/sach/@item.Sach.Hinh" alt="@(item.Sach.TenSach ?? "Không có tên")" class="product-image" />
+                            }
+                            else
+                            {
+                                @: Không có hình ảnh
+                            }
+                        </td>
+                        <td>@(item.Sach?.TenSach ?? "Không có tên")</td>
+                        <td>@(item.SoLuong ?? 0)</td>
+                        <td>@String.Format("{0:N0} đ", item.DonGia ?? 0)</td>
+                        <td>@String.Format("{0:N0} đ", (item.SoLuong ?? 0) * (item.DonGia ?? 0))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBansachModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ChiTietDonHang">
+    <Key>
+      <PropertyRef Name="MaDonHang" />
+      <PropertyRef Name="MaSach" />
+    </Key>
+    <Property Name="MaDonHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="DonGia" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="DonDatHang" Relationship="Self.FK__ChiTietDo__MaDon__5FB337D6" FromRole="ChiTietDonHang" ToRole="DonDatHang" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK__ChiTietDo__MaSac__60A75C0F" FromRole="ChiTietDonHang" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="ChiTietGioHang">
+    <Key>
+      <PropertyRef Name="MaChiTiet" />
+    </Key>
+    <Property Name="MaChiTiet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaGioHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="DonGia" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="GioHang" Relationship="Self.FK__ChiTietGi__MaGio__66603565" FromRole="ChiTietGioHang" ToRole="GioHang" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK__ChiTietGi__MaSac__6754599E" FromRole="ChiTietGioHang" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="ChucVu">
+    <Key>
+      <PropertyRef Name="MaCV" />
+    </Key>
+    <Property Name="MaCV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenCV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanViens" Relationship="Self.FK__NhanVien__MaCV__4BAC3F29" FromRole="ChucVu" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="DonDatHang">
+    <Key>
+      <PropertyRef Name="MaDonHang" />
+    </Key>
+    <Property Name="MaDonHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NgayDat" Type="DateTime" Precision="0" />
+    <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhuongThucThanhToan" Type="Int32" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDo__MaDon__5FB337D6" FromRole="DonDatHang" ToRole="ChiTietDonHang" />
+  </EntityType>
+  <EntityType Name="GioHang">
+    <Key>
+      <PropertyRef Name="MaGioHang" />
+    </Key>
+    <Property Name="MaGioHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ChiTietGioHangs" Relationship="Self.FK__ChiTietGi__MaGio__66603565" FromRole="GioHang" ToRole="ChiTietGioHang" />
+    <NavigationProperty Name="KhachHang" Relationship="Self.FK__GioHang__MaKH__6383C8BA" FromRole="GioHang" ToRole="KhachHang" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="MaKH" />
+    </Key>
+    <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__MaKH__6383C8BA" FromRole="KhachHang" ToRole="GioHang" />
+  </EntityType>
+  <EntityType Name="Loai">
+    <Key>
+      <PropertyRef Name="MaLoai" />
+    </Key>
+    <Property Name="MaLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="Saches" Relationship="Self.FK__Sach__MaLoai__5535A963" FromRole="Loai" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TenTK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaCV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ChucVu" Relationship="Self.FK__NhanVien__MaCV__4BAC3F29" FromRole="NhanVien" ToRole="ChucVu" />
+  </EntityType>
+  <EntityType Name="NhaXuatBan">
+    <Key>
+      <PropertyRef Name="MaNXB" />
+    </Key>
+    <Property Name="MaNXB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenNXB" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Saches" Relationship="Self.FK__Sach__MaNXB__5441852A" FromRole="NhaXuatBan" ToRole="Sach" />
+  </EntityType>
+  <EntityType Name="Sach">
+    <Key>
+      <PropertyRef Name="MaSach" />
+    </Key>
+    <Property Name="MaSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenSach" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Hinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="GiaBan" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="MoTa" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="MaNXB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NgayNhapHang" Type="DateTime" Precision="0" />
+    <Property Name="SoLuongTon" Type="Int32" />
+    <Property Name="MaLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDo__MaSac__60A75C0F" FromRole="Sach" ToRole="ChiTietDonHang" />
+    <NavigationProperty Name="ChiTietGioHangs" Relationship="Self.FK__ChiTietGi__MaSac__6754599E" FromRole="Sach" ToRole="ChiTietGioHang" />
+    <NavigationProperty Name="Loai" Relationship="Self.FK__Sach__MaLoai__5535A963" FromRole="Sach" ToRole="Loai" />
+    <NavigationProperty Name="NhaXuatBan" Relationship="Self.FK__Sach__MaNXB__5441852A" FromRole="Sach" ToRole="NhaXuatBan" />
+    <NavigationProperty Name="VietSaches" Relationship="Self.FK__VietSach__MaSach__5AEE82B9" FromRole="Sach" ToRole="VietSach" />
+  </EntityType>
+  <EntityType Name="TacGia">
+    <Key>
+      <PropertyRef Name="MaTG" />
+    </Key>
+    <Property Name="MaTG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenTG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TieuSu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="VietSaches" Relationship="Self.FK__VietSach__MaTG__59FA5E80" FromRole="TacGia" ToRole="VietSach" />
+  </EntityType>
+  <EntityType Name="VietSach">
+    <Key>
+      <PropertyRef Name="MaTG" />
+      <PropertyRef Name="MaSach" />
+    </Key>
+    <Property Name="MaTG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VaiTro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Sach" Relationship="Self.FK__VietSach__MaSach__5AEE82B9" FromRole="VietSach" ToRole="Sach" />
+    <NavigationProperty Name="TacGia" Relationship="Self.FK__VietSach__MaTG__59FA5E80" FromRole="VietSach" ToRole="TacGia" />
+  </EntityType>
+  <Association Name="FK__ChiTietDo__MaDon__5FB337D6">
+    <End Role="DonDatHang" Type="Self.DonDatHang" Multiplicity="1" />
+    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonDatHang">
+        <PropertyRef Name="MaDonHang" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaDonHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietDo__MaSac__60A75C0F">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="MaSach" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietGi__MaGio__66603565">
+    <End Role="GioHang" Type="Self.GioHang" Multiplicity="0..1" />
+    <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GioHang">
+        <PropertyRef Name="MaGioHang" />
+      </Principal>
+      <Dependent Role="ChiTietGioHang">
+        <PropertyRef Name="MaGioHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietGi__MaSac__6754599E">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="0..1" />
+    <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="MaSach" />
+      </Principal>
+      <Dependent Role="ChiTietGioHang">
+        <PropertyRef Name="MaSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NhanVien__MaCV__4BAC3F29">
+    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChucVu">
+        <PropertyRef Name="MaCV" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="MaCV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GioHang__MaKH__6383C8BA">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+    <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="GioHang">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sach__MaLoai__5535A963">
+    <End Role="Loai" Type="Self.Loai" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loai">
+        <PropertyRef Name="MaLoai" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sach__MaNXB__5441852A">
+    <End Role="NhaXuatBan" Type="Self.NhaXuatBan" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaXuatBan">
+        <PropertyRef Name="MaNXB" />
+      </Principal>
+      <Dependent Role="Sach">
+        <PropertyRef Name="MaNXB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VietSach__MaSach__5AEE82B9">
+    <End Role="Sach" Type="Self.Sach" Multiplicity="1" />
+    <End Role="VietSach" Type="Self.VietSach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sach">
+        <PropertyRef Name="MaSach" />
+      </Principal>
+      <Dependent Role="VietSach">
+        <PropertyRef Name="MaSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VietSach__MaTG__59FA5E80">
+    <End Role="TacGia" Type="Self.TacGia" Multiplicity="1" />
+    <End Role="VietSach" Type="Self.VietSach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TacGia">
+        <PropertyRef Name="MaTG" />
+      </Principal>
+      <Dependent Role="VietSach">
+        <PropertyRef Name="MaTG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBanSachEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
+    <EntitySet Name="ChiTietGioHangs" EntityType="Self.ChiTietGioHang" />
+    <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
+    <EntitySet Name="DonDatHangs" EntityType="Self.DonDatHang" />
+    <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
+    <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+    <EntitySet Name="Loais" EntityType="Self.Loai" />
+    <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+    <EntitySet Name="NhaXuatBans" EntityType="Self.NhaXuatBan" />
+    <EntitySet Name="Saches" EntityType="Self.Sach" />
+    <EntitySet Name="TacGias" EntityType="Self.TacGia" />
+    <EntitySet Name="VietSaches" EntityType="Self.VietSach" />
+    <AssociationSet Name="FK__ChiTietDo__MaDon__5FB337D6" Association="Self.FK__ChiTietDo__MaDon__5FB337D6">
+      <End Role="DonDatHang" EntitySet="DonDatHangs" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietDo__MaSac__60A75C0F" Association="Self.FK__ChiTietDo__MaSac__60A75C0F">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietGi__MaGio__66603565" Association="Self.FK__ChiTietGi__MaGio__66603565">
+      <End Role="GioHang" EntitySet="GioHangs" />
+      <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietGi__MaSac__6754599E" Association="Self.FK__ChiTietGi__MaSac__6754599E">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NhanVien__MaCV__4BAC3F29" Association="Self.FK__NhanVien__MaCV__4BAC3F29">
+      <End Role="ChucVu" EntitySet="ChucVus" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GioHang__MaKH__6383C8BA" Association="Self.FK__GioHang__MaKH__6383C8BA">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="GioHang" EntitySet="GioHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sach__MaLoai__5535A963" Association="Self.FK__Sach__MaLoai__5535A963">
+      <End Role="Loai" EntitySet="Loais" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sach__MaNXB__5441852A" Association="Self.FK__Sach__MaNXB__5441852A">
+      <End Role="NhaXuatBan" EntitySet="NhaXuatBans" />
+      <End Role="Sach" EntitySet="Saches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VietSach__MaSach__5AEE82B9" Association="Self.FK__VietSach__MaSach__5AEE82B9">
+      <End Role="Sach" EntitySet="Saches" />
+      <End Role="VietSach" EntitySet="VietSaches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VietSach__MaTG__59FA5E80" Association="Self.FK__VietSach__MaTG__59FA5E80">
+      <End Role="TacGia" EntitySet="TacGias" />
+      <End Role="VietSach" EntitySet="VietSaches" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

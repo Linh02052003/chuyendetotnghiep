@@ -1,0 +1,64 @@
+﻿@model banSach.Models.NhanVien
+
+@{
+    ViewBag.Title = "Cập nhật Tên Đăng Nhập và Mật Khẩu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div>
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert-box success" id="success-alert">
+                <span class="icon">✔</span>
+                <span>@TempData["Message"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert-box error" id="error-alert">
+                <span class="icon">✖</span>
+                <span>@TempData["ErrorMessage"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+    </div>
+
+    <div class="container-fluid px-4">
+        <br />
+        <h2>Cập nhật Tên Đăng Nhập và Mật Khẩu</h2>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                @using (Html.BeginForm("ChangePassword", "TaiKhoan", new { Area = "Admin" }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label for="TenTaiKhoan">Tên tài khoản</label>
+                        @Html.TextBoxFor(model => model.TenTK, new { @class = "form-control", id = "TenTaiKhoan", placeholder = "Nhập tên tài khoản" })
+                        @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MatKhau">Mật khẩu cũ</label>
+                        <input type="password" name="matKhau" class="form-control" id="MatKhau" placeholder="Nhập mật khẩu cũ" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MatKhauMoi">Mật khẩu mới</label>
+                        <input type="password" name="matKhauMoi" class="form-control" id="MatKhauMoi" placeholder="Nhập mật khẩu mới" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="XacNhanMatKhau">Xác nhận mật khẩu mới</label>
+                        <input type="password" name="xacNhanMatKhau" class="form-control" id="XacNhanMatKhau" placeholder="Nhập lại mật khẩu mới" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg">Cập nhật</button>
+                }
+            </div>
+        </div>
+    </div>
+</main>

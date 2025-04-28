@@ -1,0 +1,71 @@
+﻿@model banSach.ViewModels.TacGiaModel
+
+@{
+    ViewBag.Title = "Chi Tiết Tác Giả";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container my-5">
+    <div class="card shadow p-4">
+        <h3 class="mb-4">Thông Tin Tác Giả</h3>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Tên tác giả:</label>
+                <div>@Model.TenTG</div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Địa chỉ:</label>
+                <div>@Model.DiaChi</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Tiểu sử:</label>
+                <div>@Model.TieuSu</div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Điện thoại:</label>
+                <div>@Model.DienThoai</div>
+            </div>
+        </div>
+
+
+        @if (Model.Saches != null && Model.Saches.Any(s => s.DuocChon))
+        {
+            <div class="mt-4">
+                <h5 class="fw-bold">Các sách đã tham gia:</h5>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th>Tên sách</th>
+                            <th>Vai trò</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sach in Model.Saches.Where(s => s.DuocChon))
+                        {
+                            <tr>
+                                <td>@sach.TenSach</td>
+                                <td>@sach.VaiTro</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info mt-3">Chưa có thông tin sách đã tham gia.</div>
+        }
+
+        <div class="mt-4 text-center">
+            @Html.ActionLink("Sửa Thông Tin", "Edit", new { id = Model.MaTG }, new { @class = "btn btn-primary btn-lg me-2" })
+            @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-secondary btn-lg" })
+        </div>
+
+    </div>
+</div>

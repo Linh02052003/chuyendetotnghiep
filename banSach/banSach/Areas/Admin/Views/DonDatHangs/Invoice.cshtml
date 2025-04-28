@@ -1,0 +1,232 @@
+﻿@model banSach.Models.DonDatHang
+@{
+    ViewBag.Title = "Hóa Đơn Đơn Hàng";
+    Layout = null; // No layout for print-friendly view
+
+    // Generate the filename in the format tenkh_ngayin
+    string customerName = Model.HoTen?.Replace(" ", "_") ?? "KhachHang"; // Replace spaces with underscores, default to "KhachHang" if null
+    string printDate = DateTime.Now.ToString("ddMMyyyy"); // Format date as ddMMyyyy (e.g., 21042025)
+    string fileName = $"{customerName}_{printDate}"; // Combine to form tenkh_ngayin
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@fileName</title> <!-- Set the page title to the desired filename -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+            color: #333;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .invoice-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Logo on left, store info centered */
+            margin: 0; /* Remove margin to avoid gaps */
+        }
+
+        .store-info {
+            font-size: 14px;
+            text-align: center;
+            flex-grow: 1; /* Allow store info to take remaining space and center */
+        }
+
+            .store-info h3 {
+                margin: 0;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .store-info h2 {
+                font-size: 20px;
+                font-weight: bold;
+                text-transform: uppercase;
+                margin: 20px 0;
+            }
+
+            .store-info p {
+                margin: 5px 0;
+                color: #555;
+            }
+
+        .store-logo {
+            max-width: 100px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        .invoice-details {
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+            .invoice-details p {
+                margin: 5px 0;
+            }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+            .invoice-table th,
+            .invoice-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .invoice-table th {
+                background-color: #f5f5f5;
+                font-weight: bold;
+            }
+
+            .invoice-table .total-row {
+                font-weight: bold;
+                text-align: right;
+            }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin: 0; /* Remove margin to avoid gaps */
+        }
+
+        .print-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #ff6f00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+            .print-button:hover {
+                background: #e65c00;
+            }
+
+        /* Remove default print margins */
+        @@page {
+            margin: 0;
+        }
+
+        @@media print {
+            .print-button {
+                display: none; /* Hide print button when printing */
+            }
+
+            .invoice-container {
+                margin: 0;
+                padding: 20px; /* Keep padding for print to match on-screen */
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .store-logo {
+                max-width: 80px; /* Slightly smaller for print */
+            }
+
+            .invoice-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0;
+            }
+
+            .store-info {
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            .footer {
+                margin: 0;
+            }
+            /* Attempt to suppress browser headers and footers */
+            html, body {
+                height: auto;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <img src="~/img/logo/logo.png" alt="HT STORE Logo" class="store-logo" />
+            <div class="store-info">
+                <h3>HT STORE</h3>
+                <p>2 Nguyễn Đình Chiểu, Nha Trang</p>
+                <p>Hotline hỗ trợ: +060 (800) 801-582</p>
+                <h2>Hóa Đơn Đơn Hàng</h2>
+            </div>
+        </div>
+
+        <div class="invoice-details">
+            <p><strong>Tên khách hàng:</strong> @Model.HoTen</p>
+            <p><strong>Số điện thoại:</strong> @Model.SoDienThoai</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Địa chỉ:</strong> @Model.DiaChi</p>
+            <p><strong>Mã đơn hàng:</strong> @Model.MaDonHang</p>
+            <p><strong>Ngày đặt:</strong> @(Model.NgayDat?.ToString("dd/MM/yyyy") ?? "Chưa có ngày")</p>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Đơn Giá</th>
+                    <th>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    decimal tongTien = 0;
+                    foreach (var item in Model.ChiTietDonHangs)
+                    {
+                        var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
+                        tongTien += thanhTien;
+                        <tr>
+                            <td>@(item.Sach?.TenSach ?? "Không có tên")</td>
+                            <td style="text-align: center;">@item.SoLuong</td>
+                            <td style="text-align: right;">@String.Format("{0:N0} ₫", item.DonGia)</td>
+                            <td style="text-align: right;">@String.Format("{0:N0} ₫", thanhTien)</td>
+                        </tr>
+                    }
+                }
+                <tr class="total-row">
+                    <td colspan="3">Tổng cộng:</td>
+                    <td>@String.Format("{0:N0} ₫", tongTien)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Cảm ơn quý khách đã tin dùng dịch vụ mua sắm tại cửa hàng HT Store!</p>
+        </div>
+
+        <button class="print-button" onclick="window.print()">In Hóa Đơn</button>
+    </div>
+</body>
+</html>

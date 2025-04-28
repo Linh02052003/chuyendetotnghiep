@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập Admin";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/css/loginAdminPage.css" />
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .alert-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 250px;
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+            .alert-box.success {
+                background-color: #26ca26; /* Light green tone */
+                color: #fbfefb; /* Đậm hơn cho chữ dễ đọc */
+            }
+
+            .alert-box.error {
+                background-color: #dc3545;
+            }
+
+            .alert-box .icon {
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            .alert-box .close-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 20px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-left: auto;
+            }
+
+                .alert-box .close-btn:hover {
+                    color: #ddd;
+                }
+    </style>
+</head>
+<body>
+    <div>
+      
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert-box error" id="error-alert">
+                <span class="icon">✖</span>
+                <span>@TempData["ErrorMessage"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+    </div>
+    <div class="container">
+        <div class="login-content">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <img src="~/img/logo/logo.png" />
+                <h2 class="title">Welcome</h2>
+
+
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        @*<h5>Tên đăng nhập</h5>*@
+                        <input type="text" name="TenTK" placeholder="Tên đăng nhập" class="input resetVal"  />
+                    </div>
+                </div>
+
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        @*<h5 >Mật khẩu</h5>*@
+                        <input type="password" name="MatKhau" placeholder="Mật khẩu" class="input resetVal"  />
+                    </div>
+                </div>
+
+                <input type="submit" class="btn" value="Đăng nhập" />
+            }
+        </div>
+    </div>
+    <script src="~/Scripts/js/loginPage.js"></script>
+</body>
+</html>

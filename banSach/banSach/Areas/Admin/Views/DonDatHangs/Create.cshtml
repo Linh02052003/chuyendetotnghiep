@@ -1,0 +1,315 @@
+﻿@model banSach.Models.DonDatHang
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Tạo đơn hàng</h3>
+                        @using (Html.BeginForm("Create", "DonDatHangs", FormMethod.Post, new { @id = "orderForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="row">
+                                <!-- Cột trái: Thông tin đơn hàng -->
+                                <div class="col-md-6">
+                                    <h4 class="mb-3">Thông tin đơn hàng</h4>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-bold" for="HoTen">Họ tên</label>
+                                        @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "HoTen" } })
+                                        @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-bold" for="SoDienThoai">Số điện thoại</label>
+                                        @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "SoDienThoai" } })
+                                        @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-bold" for="Email">Email</label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "Email" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-bold" for="DiaChi">Địa chỉ</label>
+                                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control form-control-lg", @id = "DiaChi" } })
+                                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label fw-bold" for="PhuongThucThanhToan">Phương thức thanh toán</label>
+                                        @Html.DropDownListFor(model => model.PhuongThucThanhToan, new SelectList(
+                                            new List<SelectListItem>
+                                            {
+                                                new SelectListItem { Text = "Thanh toán tiền mặt", Value = "1" },
+                                                new SelectListItem { Text = "Chuyển khoản", Value = "2" }
+                                            }, "Value", "Text"), "-- Chọn phương thức thanh toán --", new { @class = "form-control form-control-lg", @id = "PhuongThucThanhToan" })
+                                        @Html.ValidationMessageFor(model => model.PhuongThucThanhToan, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <!-- Cột phải: Chi tiết đơn hàng -->
+                                <div class="col-md-6">
+                                    <h4 class="mb-3">Chi tiết đơn hàng</h4>
+                                    <table class="table table-bordered" id="chiTietTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Sách</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Thành tiền</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    <div class="mt-3">
+                                        <strong>Tổng tiền: </strong><span id="tongTien">0</span> VND
+                                    </div>
+                                    <button type="button" id="addRow" class="btn btn-secondary btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#sachModal">Thêm sách</button>
+                                </div>
+                            </div>
+
+                            <div class="m-auto mt-4 text-center">
+                                <input class="btn btn-primary btn-lg" type="submit" value="Tạo đơn hàng" />
+                                @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-primary btn-lg ms-2" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal chọn sách -->
+<div class="modal fade" id="sachModal" tabindex="-1" aria-labelledby="sachModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sachModalLabel">Tìm kiếm sách</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-3">
+                    <label for="searchSach" class="form-label">Tìm kiếm sách</label>
+                    <input type="text" id="searchSach" class="form-control" placeholder="Nhập tên sách..." />
+                    <ul id="sachList" class="list-group mt-2" style="max-height: 150px; overflow-y: auto;"></ul>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="modalSoLuong" class="form-label">Số lượng</label>
+                    <input type="number" id="modalSoLuong" class="form-control" min="1" value="1" required />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="modalDonGia" class="form-label">Đơn giá</label>
+                    <input type="number" id="modalDonGia" class="form-control" step="0.01" readonly />
+                </div>
+                <input type="hidden" id="selectedMaSach" />
+                <input type="hidden" id="selectedTenSach" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="addSachToTable">Thêm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            let index = 0;
+            const sachList = @Html.Raw(ViewBag.SachListJson != null ? ViewBag.SachListJson : "[]");
+
+            // Log dữ liệu sách để kiểm tra
+            console.log("Danh sách sách (sachList):", sachList);
+
+            // Xử lý nút "Thêm sách"
+            $('#addRow').on('click', function () {
+                console.log("Nút Thêm sách được nhấn");
+                $('#sachModal').modal('show');
+            });
+
+            // Hàm xóa dấu tiếng Việt để tìm kiếm
+            function removeDiacritics(str) {
+                return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            }
+
+            // Hàm tính và cập nhật tổng tiền
+            function updateTongTien() {
+                let tongTien = 0;
+                $('#chiTietTable tbody tr').each(function () {
+                    const soLuong = parseInt($(this).find('input[name$=".SoLuong"]').val()) || 0;
+                    const donGia = parseFloat($(this).find('input[name$=".DonGia"]').val()) || 0;
+                    const thanhTien = soLuong * donGia;
+                    $(this).find('.thanh-tien').text(thanhTien.toLocaleString('vi-VN'));
+                    tongTien += thanhTien;
+                });
+                $('#tongTien').text(tongTien.toLocaleString('vi-VN'));
+            }
+
+            // Hàm đánh lại chỉ số cho các dòng để bind model đúng
+            function reindexRows() {
+                $('#chiTietTable tbody tr').each(function (i) {
+                    const row = $(this);
+                    row.find('input[name$=".MaSach"]').attr('name', `ChiTietDonHangs[${i}].MaSach`).attr('id', `ChiTietDonHangs_${i}_MaSach`);
+                    row.find('input[name$=".SoLuong"]').attr('name', `ChiTietDonHangs[${i}].SoLuong`).attr('id', `ChiTietDonHangs_${i}_SoLuong`);
+                    row.find('input[name$=".DonGia"]').attr('name', `ChiTietDonHangs[${i}].DonGia`).attr('id', `ChiTietDonHangs_${i}_DonGia`);
+                });
+                index = $('#chiTietTable tbody tr').length;
+                console.log("Đã đánh lại chỉ số, tổng số dòng:", index);
+            }
+
+            // Xóa nội dung modal khi mở
+            $('#sachModal').on('show.bs.modal', function () {
+                console.log("Modal được mở");
+                $('#searchSach').val('');
+                $('#modalSoLuong').val(1);
+                $('#modalDonGia').val('');
+                $('#selectedMaSach').val('');
+                $('#selectedTenSach').val('');
+
+                const sachListUl = $('#sachList');
+                sachListUl.empty();
+
+                if (!sachList || sachList.length === 0) {
+                    console.warn("sachList rỗng hoặc undefined");
+                    sachListUl.append('<li class="list-group-item">Không có sách nào hoặc lỗi tải dữ liệu</li>');
+                    return;
+                }
+
+                sachListUl.append('<li class="list-group-item">Vui lòng nhập tên sách để tìm kiếm</li>');
+            });
+
+            // Lọc sách khi nhập
+            $('#searchSach').on('input', function () {
+                const searchTerm = removeDiacritics($(this).val().toLowerCase().trim());
+                const sachListUl = $('#sachList');
+                sachListUl.empty();
+
+                if (!searchTerm) {
+                    sachListUl.append('<li class="list-group-item">Vui lòng nhập tên sách để tìm kiếm</li>');
+                    return;
+                }
+
+                if (!sachList || sachList.length === 0) {
+                    sachListUl.append('<li class="list-group-item">Không có sách nào hoặc lỗi tải dữ liệu</li>');
+                    return;
+                }
+
+                const filteredSachList = sachList.filter(sach => {
+                    const tenSach = sach.TenSach ? removeDiacritics(sach.TenSach.toLowerCase()) : '';
+                    return tenSach.includes(searchTerm);
+                });
+
+                if (filteredSachList.length === 0) {
+                    sachListUl.append('<li class="list-group-item">Không tìm thấy sách</li>');
+                } else {
+                    filteredSachList.forEach(sach => {
+                        const li = `
+                            <li class="list-group-item list-group-item-action"
+                                data-masach="${sach.MaSach}"
+                                data-tensach="${sach.TenSach}"
+                                data-giaban="${sach.GiaBan}">
+                                ${sach.TenSach} (Giá: ${parseFloat(sach.GiaBan).toLocaleString('vi-VN')} VND)
+                            </li>`;
+                        sachListUl.append(li);
+                    });
+                }
+            });
+
+            // Xử lý chọn sách trong modal
+            $(document).on('click', '#sachList .list-group-item', function () {
+                $('#sachList .list-group-item').removeClass('active');
+                $(this).addClass('active');
+
+                const maSach = $(this).data('masach');
+                const tenSach = $(this).data('tensach');
+                const giaBan = $(this).data('giaban');
+
+                $('#selectedMaSach').val(maSach);
+                $('#selectedTenSach').val(tenSach);
+                $('#modalDonGia').val(parseFloat(giaBan).toFixed(2));
+
+                console.log("Sách được chọn:", { maSach, tenSach, giaBan });
+            });
+
+            // Thêm sách vào bảng
+            $('#addSachToTable').click(function () {
+                try {
+                    const maSach = $('#selectedMaSach').val();
+                    const tenSach = $('#selectedTenSach').val();
+                    const soLuong = parseInt($('#modalSoLuong').val());
+                    const donGia = parseFloat($('#modalDonGia').val());
+
+                    if (!maSach || !tenSach || isNaN(soLuong) || soLuong <= 0 || isNaN(donGia) || donGia <= 0) {
+                        alert("Vui lòng chọn sách và nhập số lượng, đơn giá hợp lệ!");
+                        return;
+                    }
+
+                    const row = `
+                        <tr>
+                            <td>${tenSach}<input type="hidden" name="ChiTietDonHangs[${index}].MaSach" id="ChiTietDonHangs_${index}_MaSach" value="${maSach}" /></td>
+                            <td>${soLuong}<input type="hidden" name="ChiTietDonHangs[${index}].SoLuong" id="ChiTietDonHangs_${index}_SoLuong" value="${soLuong}" /></td>
+                            <td>${parseFloat(donGia).toLocaleString('vi-VN')}<input type="hidden" name="ChiTietDonHangs[${index}].DonGia" id="ChiTietDonHangs_${index}_DonGia" value="${donGia}" /></td>
+                            <td class="thanh-tien">${(soLuong * donGia).toLocaleString('vi-VN')}</td>
+                            <td><button type="button" class="btn btn-danger btn-sm removeRow">Xóa</button></td>
+                        </tr>`;
+                    $('#chiTietTable tbody').append(row);
+                    index++;
+
+                    console.log("Đã thêm dòng mới, index hiện tại:", index);
+                    reindexRows();
+                    updateTongTien();
+
+                    // Đóng modal và xóa backdrop
+                    $('#sachModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass('modal-open');
+                } catch (error) {
+                    console.error("Lỗi khi thêm sách:", error);
+                    alert("Có lỗi xảy ra khi thêm sách. Vui lòng thử lại.");
+                    $('#sachModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass('modal-open');
+                }
+            });
+
+            // Xóa dòng khỏi bảng
+            $(document).on('click', '.removeRow', function () {
+                $(this).closest('tr').remove();
+                reindexRows();
+                updateTongTien();
+                console.log("Đã xóa dòng, tổng số dòng còn lại:", $('#chiTietTable tbody tr').length);
+            });
+
+            // Kiểm tra trước khi submit form
+            $('#orderForm').on('submit', function (e) {
+                const rowCount = $('#chiTietTable tbody tr').length;
+                console.log("Số dòng trước khi submit:", rowCount);
+                // Log tất cả input ẩn để kiểm tra
+                $('#chiTietTable tbody tr').each(function (i) {
+                    const maSach = $(this).find(`input[name="ChiTietDonHangs[${i}].MaSach"]`).val();
+                    const soLuong = $(this).find(`input[name="ChiTietDonHangs[${i}].SoLuong"]`).val();
+                    const donGia = $(this).find(`input[name="ChiTietDonHangs[${i}].DonGia"]`).val();
+                    console.log(`Dòng ${i}: MaSach=${maSach}, SoLuong=${soLuong}, DonGia=${donGia}`);
+                });
+                if (rowCount === 0) {
+                    e.preventDefault();
+                    alert("Vui lòng thêm ít nhất một cuốn sách vào đơn hàng!");
+                }
+            });
+        });
+    </script>
+}

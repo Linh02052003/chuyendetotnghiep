@@ -1,0 +1,207 @@
+﻿@model banSach.Models.ThongKe
+
+@{
+    ViewBag.Title = "Thống Kê Doanh Thu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <br />
+        <h2>Thống Kê Doanh Thu</h2>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                @using (Html.BeginForm("Index", "Thongke", FormMethod.Get))
+                {
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Thời gian:</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="ngayBatDau" value="@(Model.NgayBatDau != null ? Model.NgayBatDau.ToString("yyyy-MM-dd") : "")" class="form-control d-inline-block" style="width:200px" />
+                            <span> đến </span>
+                            <input type="date" name="ngayKetThuc" value="@(Model.NgayKetThuc != null ? Model.NgayKetThuc.ToString("yyyy-MM-dd") : "")" class="form-control d-inline-block" style="width:200px" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Thống kê theo:</label>
+                        <div class="col-sm-10">
+                            <select name="loaiThongKe" class="form-control" style="width:200px">
+                                <option value="ngay" @(Model.LoaiThongKe == "ngay" ? "selected" : "")>Ngày</option>
+                                <option value="thang" @(Model.LoaiThongKe == "thang" ? "selected" : "")>Tháng</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10 offset-sm-2">
+                            <button type="submit" class="btn btn-primary">Lọc</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="card-title">Chi Tiết Doanh Thu</h4>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple" class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>@(Model.LoaiThongKe == "ngay" ? "Ngày" : "Tháng")</th>
+                            <th>Số Đơn Hàng</th>
+                            <th>Doanh Thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ChiTiet != null && Model.ChiTiet.Any())
+                        {
+                            foreach (var chiTiet in Model.ChiTiet)
+                            {
+                                <tr>
+                                    <td>@chiTiet.KhoangThoiGian</td>
+                                    <td>@chiTiet.SoDonHang</td>
+                                    <td>@String.Format("{0:N0}₫", chiTiet.DoanhThu)</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @if (Model.ChiTiet != null && Model.ChiTiet.Any())
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="card-title">Biểu Đồ Doanh Thu</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart" style="max-height: 400px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Chuẩn bị dữ liệu cho biểu đồ -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Kiểm tra Chart.js đã tải chưa
+                    if (typeof Chart === 'undefined') {
+                        console.error('Chart.js không được tải. Vui lòng kiểm tra kết nối internet hoặc CDN.');
+                        return;
+                    }
+
+                    // Dữ liệu từ Model
+                    const labels = @Html.Raw(Json.Encode(Model.ChiTiet.Select(c => c.KhoangThoiGian).ToArray()));
+                    const data = @Html.Raw(Json.Encode(Model.ChiTiet.Select(c => c.DoanhThu).ToArray()));
+
+                    // Kiểm tra dữ liệu
+                    console.log('Labels:', labels);
+                    console.log('Data:', data);
+
+                    // Nhãn trục X với mã hóa đúng
+                    const xAxisLabel = '@Html.Raw(HttpUtility.HtmlDecode(Model.LoaiThongKe == "ngay" ? "Ngày" : "Tháng"))';
+
+                    // Vẽ biểu đồ cột bằng Chart.js
+                    const ctx = document.getElementById('revenueChart').getContext('2d');
+                    if (!ctx) {
+                        console.error('Không tìm thấy canvas với id "revenueChart".');
+                        return;
+                    }
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Doanh Thu (₫)',
+                                data: data,
+                                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Doanh Thu (₫)'
+                                    },
+                                    ticks: {
+                                        callback: function(value) {
+                                            return value.toLocaleString('vi-VN') + '₫';
+                                        }
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: xAxisLabel
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top'
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return 'Doanh Thu: ' + context.parsed.y.toLocaleString('vi-VN') + '₫';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+        }
+    </div>
+</main>
+
+<!-- Thêm Chart.js từ CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+<!-- CSS tùy chỉnh -->
+<style>
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .table th {
+        background-color: #e9ecef;
+    }
+</style>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<banSach.Models.DonDatHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<main>
+    <div>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert-box success" id="success-alert">
+                <span class="icon">✔</span>
+                <span>@TempData["SuccessMessage"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert-box error" id="error-alert">
+                <span class="icon">✖</span>
+                <span>@TempData["ErrorMessage"]</span>
+                <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+            </div>
+        }
+    </div>
+    <div class="container-fluid px-4">
+        <br />
+        <h2>Danh sách đơn đặt hàng</h2>
+
+        <div class="my-3">
+            @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table id="datatablesSimple" class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Họ tên</th>
+
+                            <th>Ngày đặt</th>
+
+                            <th>Phương thức thanh toán</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            // Calculate total amount for the order
+                            decimal totalAmount = item.ChiTietDonHangs.Sum(ct => (ct.SoLuong ?? 0) * (ct.DonGia ?? 0));
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+
+                                <td>@(item.NgayDat?.ToString("dd/MM/yyyy") ?? "")</td>
+
+                                <td>
+                                    @(item.PhuongThucThanhToan == 1 ? "Thanh toán tiền mặt" : item.PhuongThucThanhToan == 2 ? "Chuyển khoản" : "Không xác định")
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("CapNhatTrangThai", "DonDatHangs", FormMethod.Post, new { @class = "d-flex" }))
+                                    {
+                                        @Html.Hidden("maDonHang", item.MaDonHang)
+
+                                        @Html.DropDownList(
+                                                           "trangThai",
+                                                           new SelectList(new List<string> { "Đã thanh toán", "Chờ xác nhận", "Đang giao hàng", "Hoàn tất", "Đã huỷ" }, item.TrangThai),
+                                                           new { @class = "form-select form-select-sm me-2" }
+                                                       )
+
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">✔</button>
+                                    }
+                                </td>
+                                <td>@totalAmount.ToString("N0") VNĐ</td> <!-- Format as currency or number -->
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="@Url.Action("Details", new { id = item.MaDonHang })" title="Chi tiết">
+                                            <i class="fa-solid fa-lg fa-circle-info"></i>
+                                        </a>
+                                        <div class="ms-2"></div>
+                                        <a class="btn-print" href="@Url.Action("Invoice", "DonDatHangs", new { id = item.MaDonHang, area = "Admin" })" target="_blank" title="In Hóa Đơn">
+                                            <i class="fas fa-print"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

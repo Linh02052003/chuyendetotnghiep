@@ -1,0 +1,55 @@
+﻿@model banSach.Models.DonDatHang
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết đơn hàng</h2>
+
+<div class="card p-3">
+    <h4>Thông tin khách hàng</h4>
+    <p><strong>Mã đơn hàng:</strong> @Model.MaDonHang</p>
+    <p><strong>Họ tên:</strong> @Model.HoTen</p>
+    <p><strong>Số điện thoại:</strong> @Model.SoDienThoai</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Địa chỉ:</strong> @Model.DiaChi</p>
+    <p><strong>Ngày đặt:</strong> @(Model.NgayDat?.ToString("dd/MM/yyyy") ?? "")</p>
+    <p><strong>Phương thức thanh toán:</strong> @(Model.PhuongThucThanhToan == 1 ? "Thanh toán tiền mặt" : Model.PhuongThucThanhToan == 2 ? "Chuyển khoản" : "Không xác định")</p>
+    <p><strong>Trạng thái:</strong> @Model.TrangThai</p>
+
+    <hr />
+
+    <h4>Chi tiết sách</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tên sách</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ChiTietDonHangs)
+            {
+                var sach = item.Sach;
+                if (sach != null)
+                {
+                    var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
+                    <tr>
+                        <td>@sach.TenSach</td>
+                        <td>@item.SoLuong</td>
+                        <td>@String.Format("{0:N0}₫", item.DonGia)</td>
+                        <td>@String.Format("{0:N0}₫", thanhTien)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="my-4" style="width: 100%">
+    <div class="m-auto">
+        @Html.ActionLink("Quay Về", "Index", null, new { @class = "btn btn-primary btn-lg" })
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿@model banSach.Models.Sach
+
+@{
+    ViewBag.Title = @Model.TenSach;
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Use your existing layout
+}
+
+<!-- Start Product Area -->
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <!-- Book Image -->
+            <div class="col-lg-4 col-md-5 col-12">
+                <div class="book-image">
+                    <img src="~/img/sach/@Model.Hinh" alt="@Model.TenSach" class="img-fluid" />
+                </div>
+            </div>
+            <!-- Book Details -->
+            <div class="col-lg-8 col-md-7 col-12">
+                <div class="book-details">
+                    <h2>@Model.TenSach</h2>
+                    <div class="book-meta">
+                        <p>Loại sách: @Model.Loai.TenLoai</p>
+                        <p>Nhà Xuất Bản: @Model.NhaXuatBan.TenNXB</p>
+                    </div>
+                    <div class="product-price">
+                        <span>@String.Format("{0:N0}", Model.GiaBan) VND</span>
+                    </div>
+                    <div class="book-description">
+                        <h4>Mô Tả</h4>
+                        <p>@Model.MoTa</p>
+                    </div>
+                    <div class="book-authors">
+                        <h4>Tác Giả</h4>
+                        @if (ViewBag.Authors != null && ViewBag.Authors.Count > 0)
+                        {
+                            foreach (var author in ViewBag.Authors)
+                            {
+                                <p>@author.TenTG (@author.VaiTro)</p>
+                            }
+                        }
+                        else
+                        {
+                            <p>Không có thông tin tác giả.</p>
+                        }
+                    </div>
+                    <div class="book-actions">
+                        @if (Model.SoLuongTon != 0 && Model.SoLuongTon != null)
+                        {
+                            <a href="@Url.Action("ThemGiohang", "Giohang", new { iMasach = Model.MaSach, strURL = Request.Url.ToString() })" class="btn btn-primary">THÊM VÀO GIỎ</a>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Hết Hàng</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Product Area -->
+
+<style>
+    .book-image img {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    .book-details h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        text-transform: lowercase;
+    }
+
+    .book-meta p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .product-price span {
+        font-size: 20px;
+        font-weight: bold;
+        color: #e74c3c; /* Red color for price */
+    }
+
+    .book-description h4,
+    .book-authors h4 {
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .book-description p,
+    .book-authors p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .book-actions {
+        margin-top: 20px;
+    }
+
+        .book-actions .btn-primary {
+            background-color: #ff6f61;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+            .book-actions .btn-primary:hover {
+                background-color: #e74c3c;
+            }
+
+    .text-danger {
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>

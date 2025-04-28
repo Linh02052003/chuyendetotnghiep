@@ -1,0 +1,135 @@
+﻿@model banSach.Models.GioHang
+
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ Hàng</h2>
+
+
+
+@if (Model.ChiTietGioHangs == null || !Model.ChiTietGioHangs.Any())
+{
+    <p>Giỏ hàng của bạn hiện đang trống.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sách</th>
+                <th>Đơn Giá</th>
+                <th>Số Lượng</th>
+                <th>Thành Tiền</th>
+                <th>Thao Tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ChiTietGioHangs)
+            {
+                var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
+                <tr data-ma-sach="@item.MaSach">
+                    <td>
+                        <img src="~/img/sach/@item.Sach.Hinh" alt="@item.Sach.TenSach" style="width: 50px; height: auto;" />
+                        @item.Sach.TenSach
+                    </td>
+                    <td>@String.Format("{0:N0}", item.DonGia ?? 0) VNĐ</td>
+                    <td>
+                        <input type="number" class="form-control quantity-input"
+                               data-ma-gio-hang="@item.MaGioHang"
+                               data-ma-sach="@item.MaSach"
+                               data-old-value="@(item.SoLuong ?? 0)"
+                               value="@(item.SoLuong ?? 0)"
+                               min="0" style="width: 80px;" />
+                    </td>
+                    <td class="subtotal" data-ma-sach="@item.MaSach">@String.Format("{0:N0}", thanhTien) VNĐ</td>
+                    <td>
+                        <a href="@Url.Action("RemoveItem", "GioHang", new { maGioHang = item.MaGioHang, maSach = item.MaSach })" class="btn btn-danger btn-sm">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right"><strong>Tổng Cộng:</strong></td>
+                <td class="total"><strong>@String.Format("{0:N0}", Model.ChiTietGioHangs.Sum(item => (item.SoLuong ?? 0) * (item.DonGia ?? 0))) VNĐ</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <a href="@Url.Action("Checkout", "GioHang")" class="btn btn-primary">Đặt Hàng</a>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.quantity-input').on('change', function () {
+                var $input = $(this);
+                var maGioHang = $input.data('ma-gio-hang');
+                var maSach = $input.data('ma-sach');
+                var soLuong = parseInt($input.val()) || 0;
+
+                $.ajax({
+                    url: '@Url.Action("UpdateQuantity", "GioHang")',
+                    type: 'POST',
+                    data: {
+                        maGioHang: maGioHang,
+                        maSach: maSach,
+                        soLuong: soLuong
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            var $row = $('tr[data-ma-sach="' + maSach + '"]');
+                            $row.find('.subtotal').text(response.formattedSubtotal + ' VNĐ');
+                            $('.total strong').text(response.formattedTotal + ' VNĐ');
+
+                            if (soLuong <= 0) {
+                                $row.remove();
+                                if ($('tbody tr').length === 0) {
+                                    $('table').replaceWith('<p>Giỏ hàng của bạn hiện đang trống.</p>');
+                                }
+                            } else {
+                                // Cập nhật lại giá trị gốc nếu thành công
+                                $input.data('old-value', soLuong);
+                            }
+                        } else {
+                            alert(response.message);
+                            $input.val($input.data('old-value'));
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra khi cập nhật số lượng.');
+                        $input.val($input.data('old-value'));
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<style>
+    .table img {
+        margin-right: 10px;
+    }
+
+    .btn-primary {
+        background-color: #ff6f61;
+        border: none;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+        .btn-primary:hover {
+            background-color: #e74c3c;
+        }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        color: #fff;
+    }
+</style>

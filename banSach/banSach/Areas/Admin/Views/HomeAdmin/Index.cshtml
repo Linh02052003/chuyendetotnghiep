@@ -1,0 +1,61 @@
+﻿@model banSach.Models.ThongKeDonHang
+@{
+    ViewBag.Title = "Trang chủ Admin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert-box success" id="success-alert">
+            <span class="icon">✔</span>
+            <span>@TempData["SuccessMessage"]</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert-box error" id="error-alert">
+            <span class="icon">✖</span>
+            <span>@TempData["ErrorMessage"]</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    }
+</div>
+<main>
+    <div class="container-fluid px-4" style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <div class="row justify-content-center">
+            <!-- Card 1: Chờ xác nhận - Màu đỏ -->
+            <div class="col-md-3 mx-4">
+                <div class="card text-white bg-danger mb-3" style="height: 150px; width: 200px;">
+                    <div class="card-body text-center d-flex flex-column justify-content-center" style="padding: 10px;">
+                        <h5 class="card-title" style="font-size: 1.1rem; margin-bottom: 5px;">Chờ xác nhận</h5>
+                        <h3 class="card-text" style="font-size: 2rem; margin-bottom: 5px;">@Model.ChoXacNhan</h3>
+                        <p class="card-text" style="font-size: 0.9rem; margin-bottom: 0;">Đơn hàng</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Đã hủy - Màu đỏ -->
+            <div class="col-md-3 mx-4">
+                <div class="card text-white bg-danger mb-3" style="height: 150px; width: 200px;">
+                    <div class="card-body text-center d-flex flex-column justify-content-center" style="padding: 10px;">
+                        <h5 class="card-title" style="font-size: 1.1rem; margin-bottom: 5px;">Đã hủy</h5>
+                        <h3 class="card-text" style="font-size: 2rem; margin-bottom: 5px;">@Model.DaHuy</h3>
+                        <p class="card-text" style="font-size: 0.9rem; margin-bottom: 0;">Đơn hàng</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Đã thanh toán & Hoàn tất - Màu xanh -->
+            <div class="col-md-3 mx-4">
+                <div class="card text-white bg-success mb-3" style="height: 150px; width: 200px;">
+                    <div class="card-body text-center d-flex flex-column justify-content-center" style="padding: 10px;">
+                        <h5 class="card-title" style="font-size: 1.1rem; margin-bottom: 5px;">Đã thanh toán & Hoàn tất</h5>
+                        <h3 class="card-text" style="font-size: 2rem; margin-bottom: 5px;">@Model.DaThanhToanVaHoanTat</h3>
+                        <p class="card-text" style="font-size: 0.9rem; margin-bottom: 0;">Đơn hàng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
