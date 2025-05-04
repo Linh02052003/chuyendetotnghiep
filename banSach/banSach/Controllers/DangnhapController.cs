@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
 
 namespace banSach.Controllers
 {
@@ -13,12 +12,8 @@ namespace banSach.Controllers
     {
         // GET: Login
         private QLBanSachEntities db = new QLBanSachEntities();
-        public ActionResult Index(string message)
+        public ActionResult Index()
         {
-            if (!string.IsNullOrEmpty(message))
-            {
-                ViewBag.Message = message;
-            }
             return View();
         }
 
@@ -30,34 +25,29 @@ namespace banSach.Controllers
             string username = form["Username"];
             string password = form["Password"];
 
-            // Kiểm tra Username và Password có rỗng không
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                ViewBag.ToastError = "Vui lòng nhập số điện thoại hoặc email và mật khẩu!";
+                TempData["Error"] = "Vui lòng nhập số điện thoại hoặc email và mật khẩu!";
                 return View();
             }
 
-            // Kiểm tra Username là số điện thoại hoặc email
             var khachHang = db.KhachHangs
                 .FirstOrDefault(kh => (kh.SoDienThoai == username || kh.Email == username) && kh.MatKhau == password);
 
             if (khachHang != null)
             {
-                // Đăng nhập thành công, lưu thông tin vào Session
                 Session["KhachHang"] = khachHang;
                 Session["MaKH"] = khachHang.MaKH;
                 Session["HoTen"] = khachHang.HoTen;
 
-                TempData["SuccessMessage"] = "Đăng nhập thành công!";
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.ToastError = "Số điện thoại, email hoặc mật khẩu không đúng!";
+                TempData["Error"] = "Số điện thoại, email hoặc mật khẩu không đúng!";
                 return View();
             }
         }
-
         public ActionResult ForgotPassword()
         {
             return View();
@@ -69,7 +59,7 @@ namespace banSach.Controllers
             var user = db.KhachHangs.FirstOrDefault(k => k.Email == Email);
             if (user == null)
             {
-                ViewBag.Message = "Email không tồn tại trong hệ thống!";
+                TempData["Error"] = "Email không tồn tại trong hệ thống!";
                 return View();
             }
 
@@ -96,15 +86,7 @@ namespace banSach.Controllers
             SendMail sendMail = new SendMail();
             bool result = sendMail.SendMailFunction(user.Email, subject, body);
 
-            if (result)
-            {
-                ViewBag.Message = "✅ Link đặt lại mật khẩu đã được gửi đến email của bạn.";
-            }
-            else
-            {
-                ViewBag.Message = "❌ Gửi email thất bại. Vui lòng thử lại sau.";
-            }
-
+            
             return View();
         }
 

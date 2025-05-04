@@ -1,4 +1,6 @@
-﻿@model IEnumerable<banSach.Models.ChucVu>
+﻿@model PagedList.IPagedList<banSach.Models.ChucVu>
+@using PagedList.Mvc
+
 
 @{
     ViewBag.Title = "Index";
@@ -68,6 +70,19 @@
                         }
                     </tbody>
                 </table>
+                <div class="text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+    new PagedListRenderOptions
+    {
+        UlElementClasses = new[] { "pagination", "justify-content-center" },
+        LiElementClasses = new[] { "page-item" },
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always
+    })
+
+                </div>
             </div>
         </div>
     </div>

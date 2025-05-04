@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using banSach.Models;
+using System.Web.UI;
+using PagedList;
+
 
 namespace bansach.Areas.Admin.Controllers
 {
@@ -16,7 +19,7 @@ namespace bansach.Areas.Admin.Controllers
         private QLBanSachEntities db = new QLBanSachEntities();
 
         // GET: Admin/ChucVus
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int ?page)
         {
             if (Session["AdminUser"] == null)
             {
@@ -30,7 +33,11 @@ namespace bansach.Areas.Admin.Controllers
             }
 
             ViewBag.HoTen = user.HoTen;
-            return View(await db.ChucVus.ToListAsync());
+            int pageSize = 5; // số lượng mục trên mỗi trang
+            int pageNumber = (page ?? 1); // trang hiện tại (mặc định là 1)
+
+            var danhSach = db.ChucVus.OrderBy(cv => cv.MaCV).ToPagedList(pageNumber, pageSize);
+            return View(danhSach);
         }
 
         // GET: Admin/ChucVus/Details/5

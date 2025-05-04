@@ -150,7 +150,7 @@
                 <div class="form-group">
                     <label for="HoTen">Họ Tên</label>
                     <div class="input-container">
-                        @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", placeholder = "Nhập họ tên" })
+                        @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", placeholder = "Nhập họ tên", required = "required" })
                         @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                 <div class="form-group">
                     <label for="SoDienThoai">Số Điện Thoại</label>
                     <div class="input-container">
-                        @Html.TextBoxFor(model => model.SoDienThoai, new { @class = "form-control", placeholder = "Nhập số điện thoại", type = "tel" })
+                        @Html.TextBoxFor(model => model.SoDienThoai, new { @class = "form-control", placeholder = "Nhập số điện thoại", type = "tel", pattern = "[0-9]{10,11}" })
                         @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
                     </div>
                 </div>

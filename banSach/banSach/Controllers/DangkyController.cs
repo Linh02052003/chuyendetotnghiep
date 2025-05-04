@@ -28,21 +28,21 @@ namespace banSach.Controllers
                 // Kiểm tra xác nhận mật khẩu
                 if (khachHang.MatKhau != confirmPassword)
                 {
-                    ViewBag.ToastError = "Mật khẩu xác nhận không khớp!";
+                    TempData["Error"] = "Mật khẩu xác nhận không khớp!";
                     return View(khachHang);
                 }
 
                 // Kiểm tra điều kiện mật khẩu mạnh
                 if (khachHang.MatKhau.Length < 8 || !khachHang.MatKhau.Any(char.IsUpper) || !khachHang.MatKhau.Any(char.IsLower) || !khachHang.MatKhau.Any(char.IsDigit))
                 {
-                    ViewBag.ToastError = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và chữ số.";
+                    TempData["Error"] = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và chữ số.";
                     return View(khachHang);
                 }
 
                 // Kiểm tra email hoặc số điện thoại đã tồn tại
                 if (db.KhachHangs.Any(kh => kh.Email == khachHang.Email || kh.SoDienThoai == khachHang.SoDienThoai))
                 {
-                    ViewBag.ToastError = "Email hoặc số điện thoại đã được sử dụng.";
+                    TempData["Error"] = "Email hoặc số điện thoại đã được sử dụng.";
                     return View(khachHang);
                 }
 
@@ -55,11 +55,12 @@ namespace banSach.Controllers
                 db.KhachHangs.Add(khachHang);
                 db.SaveChanges();
 
-                TempData["SuccessMessage"] = "Đăng ký thành công! Vui lòng đăng nhập.";
+                TempData["Success"] = "Đăng ký thành công! Vui lòng đăng nhập.";
                 return RedirectToAction("Index", "Dangnhap");
             }
 
             // Nếu ModelState không hợp lệ, trả lại view với thông tin đã nhập
+            TempData["Error"] = "Vui lòng kiểm tra lại thông tin đăng ký.";
             return View(khachHang);
         }
     }

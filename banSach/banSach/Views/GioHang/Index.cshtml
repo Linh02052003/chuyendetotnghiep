@@ -5,11 +5,97 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .custom-toast-wrapper {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 9999;
+    }
+
+    .custom-toast {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        border-radius: 10px;
+        min-width: 250px;
+        max-width: 350px;
+        color: white;
+        font-size: 14px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        animation: slideIn 0.3s ease;
+        gap: 8px;
+        position: relative;
+    }
+
+    .toast-icon {
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    .toast-message {
+        flex: 1;
+        text-align: left;
+        word-break: break-word;
+    }
+
+    .toast-close {
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 8px;
+        opacity: 0.8;
+    }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+    .success-toast {
+        background-color: #2ecc40;
+    }
+
+    .error-toast {
+        background-color: #e74c3c;
+    }
+
+    keyframes slideIn {
+        from
+
+    {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    }
+</style>
+
+<div class="custom-toast-wrapper">
+    @if (TempData["Success"] != null)
+    {
+        <div class="custom-toast success-toast">
+            <i class="toast-icon fas fa-check-circle"></i>
+            <span class="toast-message">@TempData["Success"]</span>
+            <i class="toast-close fas fa-times" onclick="this.parentElement.remove()"></i>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="custom-toast error-toast">
+            <i class="toast-icon fas fa-exclamation-circle"></i>
+            <span class="toast-message">@TempData["Error"]</span>
+            <i class="toast-close fas fa-times" onclick="this.parentElement.remove()"></i>
+        </div>
+    }
+</div>
 <h2>Giỏ Hàng</h2>
 
 
 
-@if (Model.ChiTietGioHangs == null || !Model.ChiTietGioHangs.Any())
+@if (Model.ChiTietGioHang == null || !Model.ChiTietGioHang.Any())
 {
     <p>Giỏ hàng của bạn hiện đang trống.</p>
 }
@@ -26,7 +112,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.ChiTietGioHangs)
+            @foreach (var item in Model.ChiTietGioHang)
             {
                 var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
                 <tr data-ma-sach="@item.MaSach">
@@ -53,7 +139,7 @@ else
         <tfoot>
             <tr>
                 <td colspan="3" class="text-right"><strong>Tổng Cộng:</strong></td>
-                <td class="total"><strong>@String.Format("{0:N0}", Model.ChiTietGioHangs.Sum(item => (item.SoLuong ?? 0) * (item.DonGia ?? 0))) VNĐ</strong></td>
+                <td class="total"><strong>@String.Format("{0:N0}", Model.ChiTietGioHang.Sum(item => (item.SoLuong ?? 0) * (item.DonGia ?? 0))) VNĐ</strong></td>
                 <td></td>
             </tr>
         </tfoot>

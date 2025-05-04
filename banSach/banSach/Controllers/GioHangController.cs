@@ -16,7 +16,8 @@ namespace banSach.Controllers
             var maKH = Session["MaKH"]?.ToString();
             if (string.IsNullOrEmpty(maKH))
             {
-                return RedirectToAction("Index", "DangNhap", new { message = "Vui lòng đăng nhập để xem giỏ hàng." });
+                TempData["Error"] = "Vui lòng đăng nhập để xem giỏ hàng.";
+                return RedirectToAction("Index", "Dangnhap");
             }
 
             // Fetch or create the cart for the customer
@@ -35,7 +36,7 @@ namespace banSach.Controllers
 
             // Eager load the cart items and their associated books
             gioHang = db.GioHangs
-                .Include("ChiTietGioHangs.Sach") // Include navigation properties
+                .Include("ChiTietGioHang.Sach") // Include navigation properties
                 .FirstOrDefault(g => g.MaKH == maKH);
 
             return View(gioHang);
@@ -47,7 +48,7 @@ namespace banSach.Controllers
             var maKH = Session["MaKH"]?.ToString();
             if (string.IsNullOrEmpty(maKH))
             {
-                // Redirect to login if no customer is logged in
+                TempData["Error"] = "Vui lòng đăng nhập để thêm sách giỏ hàng.";
                 return RedirectToAction("Index", "Dangnhap");
             }
 
@@ -167,7 +168,7 @@ namespace banSach.Controllers
             var maKH = Session["MaKH"]?.ToString();
             if (!string.IsNullOrEmpty(maKH))
             {
-                var gioHang = db.GioHangs.Include("ChiTietGioHangs")
+                var gioHang = db.GioHangs.Include("ChiTietGioHang")
                                          .FirstOrDefault(g => g.MaKH == maKH);
 
                 if (gioHang != null && gioHang.ChiTietGioHangs != null)
@@ -195,7 +196,7 @@ namespace banSach.Controllers
             }
 
             var khachHang = db.KhachHangs.Find(maKH);
-            var gioHang = db.GioHangs.Include("ChiTietGioHangs.Sach").FirstOrDefault(g => g.MaKH == maKH);
+            var gioHang = db.GioHangs.Include("ChiTietGioHang.Sach").FirstOrDefault(g => g.MaKH == maKH);
 
             if (gioHang == null || !gioHang.ChiTietGioHangs.Any())
             {
@@ -216,7 +217,7 @@ namespace banSach.Controllers
             }
 
             var gioHang = db.GioHangs
-                            .Include("ChiTietGioHangs")
+                            .Include("ChiTietGioHang")
                             .FirstOrDefault(g => g.MaKH == maKH);
 
             if (gioHang == null || !gioHang.ChiTietGioHangs.Any())
@@ -241,9 +242,7 @@ namespace banSach.Controllers
                 Email = khachHang.Email,
                 DiaChi = khachHang.DiaChi,
                 NgayDat = DateTime.Now,
-                TrangThai = "Chờ xác nhận",
-                PhuongThucThanhToan = 3
-
+                TrangThai = "Chờ xác nhận"
             };
             db.DonDatHangs.Add(donHang);
 

@@ -164,3 +164,7 @@ D:\chuyendetotnghiep\banSach\banSach\obj\Debug\banSach.csproj.CoreCompileInputs.
 D:\chuyendetotnghiep\banSach\banSach\obj\Debug\banSach.csproj.Up2Date
 D:\chuyendetotnghiep\banSach\banSach\obj\Debug\banSach.dll
 D:\chuyendetotnghiep\banSach\banSach\obj\Debug\banSach.pdb
+D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.Mvc.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.xml
+D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.Mvc.xml

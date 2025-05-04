@@ -44,34 +44,10 @@
             <td colspan="3" class="text-right font-weight-bold">Tổng tiền:</td>
             <td class="text-danger font-weight-bold">@String.Format("{0:#,##0} đ", tongTien)</td>
         </tr>
-
-
     </tbody>
 </table>
 
-<div class="row mt-4 align-items-center">
-    <!-- Cột 1: Phương thức thanh toán -->
-    <div class="col-md-6">
-        <label for="PhuongThucThanhToan" class="font-weight-bold d-block">Phương thức thanh toán</label>
-        <select name="PhuongThucThanhToan" id="PhuongThucThanhToan" class="form-control w-75" required>
-            <option value="3">Thanh toán khi nhận hàng</option>
-            <option value="4">Chuyển khoản trước khi nhận hàng</option>
-        </select>
-    </div>
-
-    <!-- Cột 2: 2 nút điều hướng -->
-    <div class="col-md-6 text-right">
-        
-    </div>
+<div class="text-right mt-3">
+    <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary">Quay lại giỏ hàng</a>
+    <a href="@Url.Action("DatHang", "GioHang")" class="btn btn-primary">Xác nhận đặt hàng</a>
 </div>
-
-<!-- Row for the "Xác nhận đặt hàng" button -->
-<div class="row mt-2">
-    <div class="col-md-12 text-right">
-        <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary mr-2">Quay lại giỏ hàng</a>
-    
-        <a href="@Url.Action("DatHang", "GioHang")" class="btn btn-primary">Xác nhận đặt hàng</a>
-    </div>
-</div>
-
-
