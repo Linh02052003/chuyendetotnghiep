@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using banSach.Helper;
 using banSach.Models;
 using Newtonsoft.Json;
+using PagedList;
 
 namespace banSach.Areas.Admin.Controllers
 {
@@ -104,7 +106,7 @@ namespace banSach.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
         // GET: Admin/DonDatHangs
-        public ActionResult Index()
+        public ActionResult Index(int ?page)
         {
             if (Session["AdminUser"] == null)
             {
@@ -119,7 +121,11 @@ namespace banSach.Areas.Admin.Controllers
 
             ViewBag.HoTen = user.HoTen;
             var donDatHangs = db.DonDatHangs.Include(d => d.ChiTietDonHangs).ToList();
-            return View(donDatHangs);
+            int pageSize = 5; // số lượng mục trên mỗi trang
+            int pageNumber = (page ?? 1); // trang hiện tại (mặc định là 1)
+
+            var danhSach = db.DonDatHangs.OrderBy(hd => hd.MaDonHang).ToPagedList(pageNumber, pageSize);
+            return View(danhSach);
         }
 
 

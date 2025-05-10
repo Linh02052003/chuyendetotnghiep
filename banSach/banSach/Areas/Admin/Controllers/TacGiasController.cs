@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using banSach.Models;
 using banSach.ViewModels;
+using PagedList;
 
 namespace banSach.Areas.Admin.Controllers
 {
@@ -16,7 +17,7 @@ namespace banSach.Areas.Admin.Controllers
         private QLBanSachEntities db = new QLBanSachEntities();
 
         // GET: Admin/TacGias
-        public ActionResult Index()
+        public ActionResult Index(int ?page)
         {
             if (Session["AdminUser"] == null)
             {
@@ -30,7 +31,11 @@ namespace banSach.Areas.Admin.Controllers
             }
 
             ViewBag.HoTen = user.HoTen;
-            return View(db.TacGias.ToList());
+            int pageSize = 5; // số lượng mục trên mỗi trang
+            int pageNumber = (page ?? 1); // trang hiện tại (mặc định là 1)
+
+            var danhSach = db.TacGias.OrderBy(tg => tg.MaTG).ToPagedList(pageNumber, pageSize);
+            return View(danhSach);
         }
 
         // GET: Admin/TacGias/Details/5

@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "D:\\chuyendetotnghiep\\banSach\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\views\\chucvus\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\chucvus\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\controllers\\chucvuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\controllers\\chucvuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\views\\module\\menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\views\\module\\menu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\views\\home\\timkiem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\views\\home\\timkiem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\views\\book\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\views\\book\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +38,94 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\ChucVus\\Index.cshtml",
-              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\ChucVus\\Index.cshtml",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\ChucVus\\Index.cshtml",
-              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\ChucVus\\Index.cshtml",
-              "ViewState": "AgIAADoAAAAAAAAAAAAcwFQAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "TimKiem.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Home\\TimKiem.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Views\\Home\\TimKiem.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Home\\TimKiem.cshtml",
+              "RelativeToolTip": "banSach\\Views\\Home\\TimKiem.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-04T13:45:24.652Z",
+              "WhenOpened": "2025-05-07T14:23:18.962Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChucVusController.cs",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
-              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
-              "RelativeToolTip": "banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "banSach\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "banSach\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T13:42:23.752Z",
+              "WhenOpened": "2025-05-07T14:19:43.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\BaseController.cs",
+              "RelativeDocumentMoniker": "banSach\\Controllers\\BaseController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\BaseController.cs",
+              "RelativeToolTip": "banSach\\Controllers\\BaseController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBUAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T14:17:56.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GioHangController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\GioHangController.cs",
+              "RelativeDocumentMoniker": "banSach\\Controllers\\GioHangController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\GioHangController.cs",
+              "RelativeToolTip": "banSach\\Controllers\\GioHangController.cs",
+              "ViewState": "AgIAAA8BAAAAAAAAAAAwwBkBAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T14:17:48.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Book\\Index.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Views\\Book\\Index.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Book\\Index.cshtml",
+              "RelativeToolTip": "banSach\\Views\\Book\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T14:01:17.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Menu.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Module\\Menu.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Views\\Module\\Menu.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Module\\Menu.cshtml",
+              "RelativeToolTip": "banSach\\Views\\Module\\Menu.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T13:37:28.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "banSach\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAcwIEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T13:35:05.84Z",
               "EditorCaption": ""
             }
           ]

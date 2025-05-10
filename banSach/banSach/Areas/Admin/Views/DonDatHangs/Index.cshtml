@@ -1,5 +1,6 @@
-﻿@model IEnumerable<banSach.Models.DonDatHang>
-
+﻿@model IPagedList<banSach.Models.DonDatHang>
+@using PagedList.Mvc;
+@using PagedList;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -24,6 +25,7 @@
             </div>
         }
     </div>
+
     <div class="container-fluid px-4">
         <br />
         <h2>Danh sách đơn đặt hàng</h2>
@@ -37,10 +39,10 @@
                     <thead class="table-light">
                         <tr>
                             <th>Họ tên</th>
-
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Địa chỉ</th>
                             <th>Ngày đặt</th>
-
-                            <th>Phương thức thanh toán</th>
                             <th>Trạng thái</th>
                             <th>Tổng tiền</th>
                             <th>Chức năng</th>
@@ -53,29 +55,28 @@
                             decimal totalAmount = item.ChiTietDonHangs.Sum(ct => (ct.SoLuong ?? 0) * (ct.DonGia ?? 0));
                             <tr>
                                 <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
-
+                                <td>@Html.DisplayFor(modelItem => item.SoDienThoai)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
                                 <td>@(item.NgayDat?.ToString("dd/MM/yyyy") ?? "")</td>
-
-                                <td>
-                                    @(item.PhuongThucThanhToan == 1 ? "Thanh toán tiền mặt" : item.PhuongThucThanhToan == 2 ? "Chuyển khoản" : "Không xác định")
-                                </td>
                                 <td>
                                     @using (Html.BeginForm("CapNhatTrangThai", "DonDatHangs", FormMethod.Post, new { @class = "d-flex" }))
                                     {
                                         @Html.Hidden("maDonHang", item.MaDonHang)
 
                                         @Html.DropDownList(
-                                                           "trangThai",
-                                                           new SelectList(new List<string> { "Đã thanh toán", "Chờ xác nhận", "Đang giao hàng", "Hoàn tất", "Đã huỷ" }, item.TrangThai),
-                                                           new { @class = "form-select form-select-sm me-2" }
-                                                       )
+                                                                          "trangThai",
+                                                                          new SelectList(new List<string> { "Đã thanh toán", "Chờ xác nhận", "Đang giao hàng", "Hoàn tất", "Đã huỷ" }, item.TrangThai),
+                                                                          new { @class = "form-select form-select-sm me-2" }
+                                                                      )
 
                                         <button type="submit" class="btn btn-sm btn-outline-primary">✔</button>
                                     }
                                 </td>
-                                <td>@totalAmount.ToString("N0") VNĐ</td> <!-- Format as currency or number -->
+                                <td>@totalAmount.ToString("N0")</td> <!-- Format as currency or number -->
                                 <td>
                                     <div class="d-flex">
+                                        <div class="ms-2"></div>
                                         <a href="@Url.Action("Details", new { id = item.MaDonHang })" title="Chi tiết">
                                             <i class="fa-solid fa-lg fa-circle-info"></i>
                                         </a>
@@ -89,6 +90,20 @@
                         }
                     </tbody>
                 </table>
+                <div class="text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+              new PagedListRenderOptions
+              {
+                  UlElementClasses = new[] { "pagination", "justify-content-center" },
+                  LiElementClasses = new[] { "page-item" },
+                  DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                  DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                  DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                  DisplayLinkToNextPage = PagedListDisplayMode.Always
+              })
+
+                </div>
+
             </div>
         </div>
     </div>

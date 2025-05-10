@@ -252,6 +252,7 @@
     <Content Include="Content\slicknav.min.css" />
     <Content Include="Content\themify-icons.css" />
     <Content Include="css\layout.css" />
+    <Content Include="css\phantrang.css" />
     <Content Include="css\thongbao.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -320,6 +321,10 @@
     <Content Include="Areas\Admin\Views\TacGias\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TacGias\Index.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\DonDatHangs\Invoice.cshtml" />
+    <Content Include="Areas\Admin\Views\DonDatHangs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Thongke\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoan\Index.cshtml" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
@@ -336,10 +341,6 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Areas\Admin\Views\DonDatHangs\Invoice.cshtml" />
-    <Content Include="Areas\Admin\Views\DonDatHangs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Thongke\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\TaiKhoan\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\easing.js" />
     <Content Include="Scripts\finalcountdown.min.js" />
@@ -380,12 +381,9 @@
     <Content Include="Views\Dangnhap\ResetPassword.cshtml" />
     <Content Include="Views\GioHang\Checkout.cshtml" />
     <Content Include="Views\GioHang\Index.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\TimKiem.cshtml" />
     <Content Include="Views\Module\Menu.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Thongtin\ChiTietDonHang.cshtml" />
     <Content Include="Views\Thongtin\DoiMatKhau.cshtml" />

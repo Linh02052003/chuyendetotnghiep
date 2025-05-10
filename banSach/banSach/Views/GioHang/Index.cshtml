@@ -95,7 +95,7 @@
 
 
 
-@if (Model.ChiTietGioHang == null || !Model.ChiTietGioHang.Any())
+@if (Model.ChiTietGioHangs == null || !Model.ChiTietGioHangs.Any())
 {
     <p>Giỏ hàng của bạn hiện đang trống.</p>
 }
@@ -112,7 +112,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.ChiTietGioHang)
+            @foreach (var item in Model.ChiTietGioHangs)
             {
                 var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
                 <tr data-ma-sach="@item.MaSach">
@@ -139,7 +139,7 @@ else
         <tfoot>
             <tr>
                 <td colspan="3" class="text-right"><strong>Tổng Cộng:</strong></td>
-                <td class="total"><strong>@String.Format("{0:N0}", Model.ChiTietGioHang.Sum(item => (item.SoLuong ?? 0) * (item.DonGia ?? 0))) VNĐ</strong></td>
+                <td class="total"><strong>@String.Format("{0:N0}", Model.ChiTietGioHangs.Sum(item => (item.SoLuong ?? 0) * (item.DonGia ?? 0))) VNĐ</strong></td>
                 <td></td>
             </tr>
         </tfoot>

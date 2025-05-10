@@ -36,7 +36,7 @@ namespace banSach.Controllers
 
             // Eager load the cart items and their associated books
             gioHang = db.GioHangs
-                .Include("ChiTietGioHang.Sach") // Include navigation properties
+                .Include("ChiTietGioHangs.Sach") // Include navigation properties
                 .FirstOrDefault(g => g.MaKH == maKH);
 
             return View(gioHang);
@@ -168,7 +168,7 @@ namespace banSach.Controllers
             var maKH = Session["MaKH"]?.ToString();
             if (!string.IsNullOrEmpty(maKH))
             {
-                var gioHang = db.GioHangs.Include("ChiTietGioHang")
+                var gioHang = db.GioHangs.Include("ChiTietGioHangs")
                                          .FirstOrDefault(g => g.MaKH == maKH);
 
                 if (gioHang != null && gioHang.ChiTietGioHangs != null)
@@ -196,7 +196,7 @@ namespace banSach.Controllers
             }
 
             var khachHang = db.KhachHangs.Find(maKH);
-            var gioHang = db.GioHangs.Include("ChiTietGioHang.Sach").FirstOrDefault(g => g.MaKH == maKH);
+            var gioHang = db.GioHangs.Include("ChiTietGioHangs.Sach").FirstOrDefault(g => g.MaKH == maKH);
 
             if (gioHang == null || !gioHang.ChiTietGioHangs.Any())
             {
@@ -217,7 +217,7 @@ namespace banSach.Controllers
             }
 
             var gioHang = db.GioHangs
-                            .Include("ChiTietGioHang")
+                            .Include("ChiTietGioHangs")
                             .FirstOrDefault(g => g.MaKH == maKH);
 
             if (gioHang == null || !gioHang.ChiTietGioHangs.Any())

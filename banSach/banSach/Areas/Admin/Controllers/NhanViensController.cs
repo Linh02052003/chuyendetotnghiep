@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 using banSach.Models;
+using PagedList;
 
 namespace bansach.Areas.Admin.Controllers
 {
@@ -13,7 +15,7 @@ namespace bansach.Areas.Admin.Controllers
         private QLBanSachEntities db = new QLBanSachEntities();
 
         // GET: Admin/NhanViens
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
             if (Session["AdminUser"] == null)
             {
@@ -27,7 +29,24 @@ namespace bansach.Areas.Admin.Controllers
             }
 
             ViewBag.HoTen = user.HoTen;
-            return View(await db.NhanViens.Include(nv => nv.ChucVu).ToListAsync());
+
+            int pageSize = 5; // Số lượng mục trên mỗi trang
+            int pageNumber = page ?? 1; // Trang hiện tại, mặc định là 1
+
+            var danhSach = await db.NhanViens
+         .Include(nv => nv.ChucVu)
+         .OrderBy(nv => nv.HoTen)
+         .Skip((pageNumber - 1) * pageSize) // Bỏ qua các bản ghi của trang trước
+         .Take(pageSize) // Lấy số bản ghi tương ứng với pageSize
+         .ToListAsync();
+
+            // Đếm tổng số bản ghi để tính số trang
+            var totalItemCount = await db.NhanViens.CountAsync();
+
+            // Tạo đối tượng PagedList từ danh sách đã lấy
+            var pagedList = new StaticPagedList<NhanVien>(danhSach, pageNumber, pageSize, totalItemCount);
+
+            return View(pagedList);
         }
 
         // GET: Admin/NhanViens/Details/5

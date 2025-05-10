@@ -30,72 +30,104 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <style>
-        /* Cố định toàn bộ header */
-        header.header {
-            position: fixed !important;
+        /* Đảm bảo header có vị trí tương đối và cố định */
+        .header.shop {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; /* Đảm bảo header nằm trên các phần tử khác */
-            background-color: #fff; /* Đặt màu nền để tránh trong suốt */
+            z-index: 1000;
+            background-color: #fff;
+            font-size: 14px;
         }
 
-        /* Đẩy nội dung bên dưới xuống để không bị che bởi header cố định */
-        body {
-            padding-top: 150px; /* Điều chỉnh giá trị này dựa trên chiều cao của toàn bộ header */
+        /* Tạo style cho thanh menu */
+        .sticky-menu {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background-color: #333; /* Nền xám đậm */
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 13px; /* Giảm kích thước font để thu hẹp */
         }
 
-        /* Đảm bảo preloader không bị ảnh hưởng */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            z-index: 9999;
+            /* Điều chỉnh container bên trong sticky-menu */
+            .sticky-menu .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 3px 10px; /* Giảm padding để làm thanh mỏng hơn */
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+        /* Đảm bảo các mục menu hiển thị trên một hàng và căn giữa */
+        .main-menu {
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .preloader-inner {
-            text-align: center;
-        }
-
-        .preloader.fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        /* Xóa CSS cố định cho header-inner vì đã áp dụng cho toàn bộ header */
-        .header-inner {
-            position: static !important; /* Đặt lại để header-inner không bị cố định riêng */
-        }
-
-        /* CSS cho search bar */
-        .search-bar-top {
+            padding: 3px 0; /* Giảm padding để làm thanh mỏng hơn */
+            margin: 0;
+            flex-wrap: nowrap; /* Ngăn ngắt dòng */
             width: 100%;
         }
 
-        .search-bar {
-            display: flex;
-            align-items: center;
-            width: 100%; /* Đảm bảo search bar chiếm toàn bộ chiều rộng của container */
-            border: 1px solid #ccc; /* Giữ viền giống hình ảnh */
-            border-radius: 5px; /* Bo góc nhẹ */
-        }
-
-            .search-bar input[name="skey"] {
-                flex: 1; /* Ô input chiếm toàn bộ không gian còn lại */
-                border: none; /* Xóa viền mặc định của input */
-                padding: 10px;
-                outline: none; /* Xóa viền focus */
-                font-size: 16px;
+            .main-menu li {
+                list-style: none;
+                margin: 0 10px; /* Giảm margin để thu hẹp khoảng cách */
             }
 
-            
+                .main-menu li a {
+                    text-decoration: none;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 13px; /* Giảm kích thước font */
+                    padding: 3px 8px; /* Giảm padding để thu hẹp chiều cao */
+                    white-space: nowrap; /* Đảm bảo chữ không xuống dòng */
+                }
+
+                /* Style cho mục Trang Chủ với nền cam */
+                .main-menu li.highlight a {
+                    background-color: #ff6f00; /* Nền cam */
+                    color: #fff;
+                    border-radius: 5px;
+                }
+
+                /* Hover cho các mục menu */
+                .main-menu li a:hover {
+                    color: #ff6f00;
+                }
+
+                .main-menu li.highlight a:hover {
+                    background-color: #e65c00; /* Nền cam đậm hơn khi hover */
+                    color: #fff;
+                }
+
+        /* Điều chỉnh topbar */
+        .topbar {
+            font-size: 12px;
+            padding: 5px 0;
+        }
+
+            .topbar .list-main li {
+                margin-right: 10px;
+            }
+
+        /* Điều chỉnh search bar */
+        .search-bar-top {
+            padding: 5px 0;
+        }
+
+        .search-bar input {
+            font-size: 12px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        /* Đảm bảo navbar và các phần tử con không bị ảnh hưởng */
+        .navbar-collapse, .nav-inner {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -206,17 +238,7 @@
             </div>
         </div>
         <!-- Header Inner -->
-        <div class="header-inner">
-            <div class="container">
-                <div class="cat-nav-head">
-                    <div class="row">
-                        <div class="col-lg-9 col-12">
-                            @Html.Action("Menu", "Module")
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Action("Menu", "Module")
         <!--/ End Header Inner -->
     </header>
 

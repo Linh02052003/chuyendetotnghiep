@@ -19,7 +19,7 @@ namespace banSach.Controllers
             var maKH = HttpContext.Session["MaKH"]?.ToString();
             if (!string.IsNullOrEmpty(maKH))
             {
-                var gioHang = db.GioHangs.Include("ChiTietGioHang")
+                var gioHang = db.GioHangs.Include("ChiTietGioHangs")
                                          .FirstOrDefault(g => g.MaKH == maKH);
 
                 if (gioHang != null && gioHang.ChiTietGioHangs != null)

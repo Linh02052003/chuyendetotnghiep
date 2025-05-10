@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using banSach.Models;
+using PagedList;
 
 namespace bansach.Areas.Admin.Controllers
 {
@@ -27,7 +28,7 @@ namespace bansach.Areas.Admin.Controllers
         }
 
         // GET: Admin/Loais
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int ?page)
         {
             if (Session["AdminUser"] == null)
             {
@@ -41,7 +42,11 @@ namespace bansach.Areas.Admin.Controllers
             }
 
             ViewBag.HoTen = user.HoTen;
-            return View(await db.Loais.ToListAsync());
+            int pageSize = 5; // số lượng mục trên mỗi trang
+            int pageNumber = (page ?? 1); // trang hiện tại (mặc định là 1)
+
+            var danhSach = db.Loais.OrderBy(l => l.MaLoai).ToPagedList(pageNumber, pageSize);
+            return View(danhSach);
         }
 
         // GET: Admin/Loais/Details/5
