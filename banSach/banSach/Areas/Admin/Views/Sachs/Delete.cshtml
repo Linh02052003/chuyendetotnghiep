@@ -25,7 +25,7 @@
     </p>
     <p><span class="fw-bold">Giá bán</span><br /> <span> @String.Format(CultureInfo.GetCultureInfo("vi-VN"), "{0:c0}", Model.GiaBan)</span></p>
 
-    @using (Html.BeginForm("Delete", "NhanViens", FormMethod.Post))
+    @using (Html.BeginForm("Delete", "Sachs", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="m-auto">

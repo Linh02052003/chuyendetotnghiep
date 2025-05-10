@@ -231,7 +231,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                         <div class="single-product">
                             <div class="product-img">
-                                <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })">
+                                <a href="@Url.Action("Details", "Book", new { id = sach.MaSach })">
                                     <img class="default-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach" style="width: 100%; height: 200px; object-fit: cover;">
                                     <img class="hover-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach" style="width: 100%; height: 200px; object-fit: cover;">
                                 </a>
@@ -248,7 +248,7 @@
                             </div>
                             <div class="product-content text-center">
                                 <h3>
-                                    <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })" class="product-title">@sach.TenSach</a>
+                                    <a href="@Url.Action("Details", "Book", new { id = sach.MaSach })" class="product-title">@sach.TenSach</a>
                                 </h3>
                                 <div class="product-price">
                                     @if (sach.SoLuongTon != 0 && sach.SoLuongTon != null)

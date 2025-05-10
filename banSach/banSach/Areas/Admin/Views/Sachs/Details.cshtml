@@ -33,8 +33,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <span class="fw-bold">Mô tả</span><br />
-                    @Html.DisplayFor(model => model.MoTa)
+                    @Html.Raw(Model.MoTa?.Replace("\n", "<br />").Replace("\r", ""))
                 </div>
+
                 <div class="col-md-6">
                     <span class="fw-bold">Ngày nhập</span><br />
                     @Html.DisplayFor(model => model.NgayNhapHang)

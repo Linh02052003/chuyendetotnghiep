@@ -57,7 +57,8 @@ namespace banSach.Controllers
                                MaSach = vs.MaSach,
                                TenSach = vs.Sach.TenSach,
                                VaiTro = vs.VaiTro,
-                               TenTG = tg.TenTG
+                               TenTG = tg.TenTG,
+                               TieuSu=tg.TieuSu,
                            }).ToList();
 
             // Log the results for debugging

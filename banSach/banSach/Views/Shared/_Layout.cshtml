@@ -30,90 +30,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <style>
-        /* Đảm bảo header có vị trí tương đối và cố định */
+        /* Make the entire header sticky */
         .header.shop {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
             background-color: #fff;
             font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* Tạo style cho thanh menu */
-        .sticky-menu {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            background-color: #333; /* Nền xám đậm */
-            width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            color: #fff;
-            font-size: 13px; /* Giảm kích thước font để thu hẹp */
+        /* Ensure body has padding to prevent content from being hidden under the header */
+        body {
+            padding-top: 150px; /* Adjust this value based on the header's height */
         }
 
-            /* Điều chỉnh container bên trong sticky-menu */
-            .sticky-menu .container {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 3px 10px; /* Giảm padding để làm thanh mỏng hơn */
-                max-width: 1200px;
-                margin: 0 auto;
-            }
-
-        /* Đảm bảo các mục menu hiển thị trên một hàng và căn giữa */
-        .main-menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 3px 0; /* Giảm padding để làm thanh mỏng hơn */
-            margin: 0;
-            flex-wrap: nowrap; /* Ngăn ngắt dòng */
-            width: 100%;
-        }
-
-            .main-menu li {
-                list-style: none;
-                margin: 0 10px; /* Giảm margin để thu hẹp khoảng cách */
-            }
-
-                .main-menu li a {
-                    text-decoration: none;
-                    color: #fff;
-                    font-weight: 500;
-                    font-size: 13px; /* Giảm kích thước font */
-                    padding: 3px 8px; /* Giảm padding để thu hẹp chiều cao */
-                    white-space: nowrap; /* Đảm bảo chữ không xuống dòng */
-                }
-
-                /* Style cho mục Trang Chủ với nền cam */
-                .main-menu li.highlight a {
-                    background-color: #ff6f00; /* Nền cam */
-                    color: #fff;
-                    border-radius: 5px;
-                }
-
-                /* Hover cho các mục menu */
-                .main-menu li a:hover {
-                    color: #ff6f00;
-                }
-
-                .main-menu li.highlight a:hover {
-                    background-color: #e65c00; /* Nền cam đậm hơn khi hover */
-                    color: #fff;
-                }
-
-        /* Điều chỉnh topbar */
+        /* Adjust topbar */
         .topbar {
             font-size: 12px;
             padding: 5px 0;
+            background-color: #f8f8f8;
         }
 
             .topbar .list-main li {
                 margin-right: 10px;
             }
 
-        /* Điều chỉnh search bar */
+        /* Adjust search bar */
         .search-bar-top {
             padding: 5px 0;
         }
@@ -124,7 +69,67 @@
             width: 200px;
         }
 
-        /* Đảm bảo navbar và các phần tử con không bị ảnh hưởng */
+        /* Style for the sticky menu */
+        .sticky-menu {
+            background-color: #333;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 13px;
+        }
+
+            .sticky-menu .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 3px 10px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+        /* Ensure menu items are displayed in a row and centered */
+        .main-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3px 0;
+            margin: 0;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+            .main-menu li {
+                list-style: none;
+                margin: 0 10px;
+            }
+
+                .main-menu li a {
+                    text-decoration: none;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 13px;
+                    padding: 3px 8px;
+                    white-space: nowrap;
+                }
+
+                /* Style for highlighted menu item (e.g., Trang Chủ) */
+                .main-menu li.highlight a {
+                    background-color: #ff6f00;
+                    color: #fff;
+                    border-radius: 5px;
+                }
+
+                /* Hover effects for menu items */
+                .main-menu li a:hover {
+                    color: #ff6f00;
+                }
+
+                .main-menu li.highlight a:hover {
+                    background-color: #e65c00;
+                    color: #fff;
+                }
+
+        /* Ensure navbar and its children are not affected */
         .navbar-collapse, .nav-inner {
             width: 100%;
         }

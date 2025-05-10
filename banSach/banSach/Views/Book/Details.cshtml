@@ -28,7 +28,8 @@
                     </div>
                     <div class="book-description">
                         <h4>Mô Tả</h4>
-                        <p>@Model.MoTa</p>
+                        <p>@Html.Raw(Model.MoTa?.Replace("\n", "<br />").Replace("\r", ""))</p>
+
                     </div>
                     <div class="book-authors">
                         <h4>Tác Giả</h4>
@@ -37,6 +38,7 @@
                             foreach (var author in ViewBag.Authors)
                             {
                                 <p>@author.TenTG (@author.VaiTro)</p>
+                                <p>Tiểu sủ: @author.TieuSu</p>
                             }
                         }
                         else

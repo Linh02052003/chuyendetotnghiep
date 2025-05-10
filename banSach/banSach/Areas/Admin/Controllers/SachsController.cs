@@ -180,7 +180,13 @@ namespace bansach.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Xử lý upload hình nếu có
+                // Lấy sách cũ từ DB để giữ lại hình ảnh nếu không có hình mới
+                var sachCu = await db.Saches.AsNoTracking().FirstOrDefaultAsync(s => s.MaSach == sach.MaSach);
+                if (sachCu == null)
+                {
+                    return HttpNotFound();
+                }
+
                 if (HinhAnh != null && HinhAnh.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(HinhAnh.FileName);
@@ -188,17 +194,25 @@ namespace bansach.Areas.Admin.Controllers
                     HinhAnh.SaveAs(path);
                     sach.Hinh = fileName;
                 }
+                else
+                {
+                    // Giữ lại hình cũ nếu không upload ảnh mới
+                    sach.Hinh = sachCu.Hinh;
+                }
+
                 sach.Status = 1;
                 db.Entry(sach).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+
                 TempData["Message"] = "Cập nhật sách thành công!";
                 return RedirectToAction("Index");
             }
-            
+
             ViewBag.MaLoai = new SelectList(db.Loais, "MaLoai", "TenLoai", sach.MaLoai);
             ViewBag.MaNXB = new SelectList(db.NhaXuatBans, "MaNXB", "TenNXB", sach.MaNXB);
             return View(sach);
         }
+
 
         // GET: Admin/Saches/Delete/5
         public async Task<ActionResult> Delete(string id)

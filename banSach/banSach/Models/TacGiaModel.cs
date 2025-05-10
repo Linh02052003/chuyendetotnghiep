@@ -23,6 +23,8 @@ namespace banSach.ViewModels
         public string TenSach { get; set; }
         public bool DuocChon { get; set; }
         public string VaiTro { get; set; }
-        public string TenTG { get; set; }    
+        public string TenTG { get; set; }
+        public string TieuSu { get; set; }
+
     }
 }
