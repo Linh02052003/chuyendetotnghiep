@@ -36,5 +36,18 @@ namespace banSach.Controllers
             // Trả về view TimKiem với danh sách sách tìm được
             return View(searchResults);
         }
+
+        public ActionResult GioiThieu()
+        {
+            return View();
+        }
+        public ActionResult ChinhSachBanHang()
+        {
+            return View();
+        }
+        public ActionResult ChinhSachBaoMat()
+        {
+            return View();
+        }
     }
 }

@@ -24,7 +24,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -132,6 +132,23 @@
         /* Ensure navbar and its children are not affected */
         .navbar-collapse, .nav-inner {
             width: 100%;
+        }
+
+        .footer {
+            font-size: 14px;
+        }
+
+            .footer .single-footer h4 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .footer .single-footer ul li {
+                margin-bottom: 6px;
+            }
+
+        .footer-top.section {
+            padding: 60px 0; /* giảm chiều cao */
         }
     </style>
 </head>
@@ -261,45 +278,42 @@
 
     <!-- Start Footer Area -->
     <footer class="footer">
-        <div class="footer-top section">
+        <div class="footer-top section py-4">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-12">
-                        <div class="single-footer about">
-                            <div class="logo">
-                                <a href="index.html"><img src="~/img/logo/logo2.png" alt="#"></a>
-                            </div>
-                            <p class="text">Website bán sách trực tuyến của Books Store, hỗ trợ 24/7 cùng nhiều ưu đẫi hấp dẫn. Luôn luôn cập nhật mới nhiều loại sách.</p>
-                            <p class="text">Cần hỗ trợ liên hệ với chúng tôi: <span><a href="tel:123456789">+0123 456 789</a></span></p>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-12">
-                        <div class="single-footer links">
-                            <h4>Information</h4>
+                <div class="row gx-2 gy-3">
+                    <!-- Cột 1: Thông tin -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-footer links p-2">
+                            <h4>Về chúng tôi</h4>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Faq</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Help</a></li>
+                                <li><a href="@Url.Action("GioiThieu", "Home")">Giới thiệu</a></li>
+                                <li><a href="@Url.Action("ChinhSachBanHang", "Home")">Chính sách bán hàng</a></li>
+                                <li><a href="@Url.Action("ChinhSachBaoMat", "Home")">Chính sách bảo mật</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-12">
-                        <div class="single-footer links">
-                            <h4>Customer Service</h4>
+                    <!-- Cột 2: Tài khoản -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-footer links p-2">
+                            <h4>Tài khoản của tôi</h4>
                             <ul>
-                                <li><a href="#">Payment Methods</a></li>
-                                <li><a href="#">Money-back</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                @if (Session["KhachHang"] == null || string.IsNullOrEmpty(Session["KhachHang"]?.ToString()))
+                                {
+                                    <li><a href="@Url.Action("Index", "Dangnhap")">Đăng Nhập</a></li>
+                                    <li><a href="@Url.Action("Index", "Dangky")">Đăng Ký</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Index", "Thongtin")">Thông Tin Cá Nhân</a></li>
+                                    <li><a href="@Url.Action("DonHang", "Thongtin")">Đơn Hàng Đã Mua</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <div class="single-footer social">
-                            <h4>Thông tin</h4>
+                    <!-- Cột 3: Liên hệ -->
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="single-footer social p-2">
+                            <h4>Thông tin liên hệ</h4>
                             <div class="contact">
                                 <ul>
                                     <li>Số 2 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa</li>
@@ -308,7 +322,7 @@
                                     <li>+012 3456 7890</li>
                                 </ul>
                             </div>
-                            <ul>
+                            <ul class="d-flex gap-2 mt-2">
                                 <li><a href="#"><i class="bx bxl-facebook"></i></a></li>
                                 <li><a href="#"><i class="bx bxl-twitter"></i></a></li>
                                 <li><a href="#"><i class="bx bxl-pinterest"></i></a></li>

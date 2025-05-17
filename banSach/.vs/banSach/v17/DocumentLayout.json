@@ -3,36 +3,24 @@
   "WorkspaceRootPath": "D:\\chuyendetotnghiep\\banSach\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\views\\book\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\views\\book\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\controllers\\dondathangscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\controllers\\dondathangscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\views\\dondathangs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\dondathangs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\models\\tacgiamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\models\\tacgiamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\other\\util.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\other\\util.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\models\\thongkedonhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\models\\thongkedonhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\other\\paylib.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\other\\paylib.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\models\\thongke.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\models\\thongke.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\views\\tacgias\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\tacgias\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\views\\sachs\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\sachs\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\other\\paycompare.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\other\\paycompare.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,110 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ThongKeDonHang.cs",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Models\\ThongKeDonHang.cs",
-              "RelativeDocumentMoniker": "banSach\\Models\\ThongKeDonHang.cs",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Models\\ThongKeDonHang.cs",
-              "RelativeToolTip": "banSach\\Models\\ThongKeDonHang.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Util.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Other\\Util.cs",
+              "RelativeDocumentMoniker": "banSach\\Other\\Util.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Other\\Util.cs",
+              "RelativeToolTip": "banSach\\Other\\Util.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T04:41:06.753Z",
+              "WhenOpened": "2025-05-17T03:17:50.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PayLib.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Other\\PayLib.cs",
+              "RelativeDocumentMoniker": "banSach\\Other\\PayLib.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Other\\PayLib.cs",
+              "RelativeToolTip": "banSach\\Other\\PayLib.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAowAYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T03:17:49.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ThongKe.cs",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Models\\ThongKe.cs",
-              "RelativeDocumentMoniker": "banSach\\Models\\ThongKe.cs",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Models\\ThongKe.cs",
-              "RelativeToolTip": "banSach\\Models\\ThongKe.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "PayCompare.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Other\\PayCompare.cs",
+              "RelativeDocumentMoniker": "banSach\\Other\\PayCompare.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Other\\PayCompare.cs",
+              "RelativeToolTip": "banSach\\Other\\PayCompare.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T04:41:03.412Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "BaseController.cs",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\BaseController.cs",
-              "RelativeDocumentMoniker": "banSach\\Controllers\\BaseController.cs",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\BaseController.cs",
-              "RelativeToolTip": "banSach\\Controllers\\BaseController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T04:40:09.972Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TacGiaModel.cs",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Models\\TacGiaModel.cs",
-              "RelativeDocumentMoniker": "banSach\\Models\\TacGiaModel.cs",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Models\\TacGiaModel.cs",
-              "RelativeToolTip": "banSach\\Models\\TacGiaModel.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAswBoAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T04:38:25.992Z",
+              "WhenOpened": "2025-05-17T03:17:49.293Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BookController.cs",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\BookController.cs",
-              "RelativeDocumentMoniker": "banSach\\Controllers\\BookController.cs",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Controllers\\BookController.cs",
-              "RelativeToolTip": "banSach\\Controllers\\BookController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAYwDwAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T04:37:36.891Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\TacGias\\Details.cshtml",
-              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\TacGias\\Details.cshtml",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\TacGias\\Details.cshtml",
-              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\TacGias\\Details.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADEAAABxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T04:35:53.197Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\Sachs\\Details.cshtml",
-              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\Sachs\\Details.cshtml",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\Sachs\\Details.cshtml",
-              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\Sachs\\Details.cshtml",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T04:13:25.047Z",
+              "WhenOpened": "2025-05-17T03:15:04.573Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Book\\Details.cshtml",
-              "RelativeDocumentMoniker": "banSach\\Views\\Book\\Details.cshtml",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\Book\\Details.cshtml",
-              "RelativeToolTip": "banSach\\Views\\Book\\Details.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADMAAAC1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T04:11:48.987Z",
+              "Title": "DonDatHangsController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T03:14:30.002Z",
               "EditorCaption": ""
             }
           ]
