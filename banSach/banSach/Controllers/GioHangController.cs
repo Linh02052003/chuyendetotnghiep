@@ -242,7 +242,8 @@ namespace banSach.Controllers
                 Email = khachHang.Email,
                 DiaChi = khachHang.DiaChi,
                 NgayDat = DateTime.Now,
-                TrangThai = "Chờ xác nhận"
+                TrangThai = "Chờ xác nhận",
+                PhuongThucThanhToan = 1
             };
             db.DonDatHangs.Add(donHang);
 

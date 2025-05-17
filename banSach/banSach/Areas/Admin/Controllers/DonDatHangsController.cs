@@ -194,7 +194,7 @@ namespace banSach.Areas.Admin.Controllers
                     Email = model.Email,
                     DiaChi = model.DiaChi,
                     NgayDat = DateTime.Now,
-                    PhuongThucThanhToan = 1,
+                    PhuongThucThanhToan = model.PhuongThucThanhToan,
                     TrangThai = string.IsNullOrEmpty(model.TrangThai) ? "Đã thanh toán" : model.TrangThai
                 };
 
