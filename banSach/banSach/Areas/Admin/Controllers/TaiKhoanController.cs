@@ -14,6 +14,17 @@ namespace banSach.Areas.Admin.Controllers
         // GET: Admin/TaiKhoan/Index
         public ActionResult Index()
         {
+            if (Session["AdminUser"] == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+
+            var user = Session["AdminUser"] as NhanVien;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+            ViewBag.HoTen = user.HoTen;
             var nhanVien = Session["AdminUser"] as NhanVien;
             if (nhanVien == null) return RedirectToAction("Index", "Login", new { Area = "Admin" });
             return View(nhanVien);
@@ -22,7 +33,7 @@ namespace banSach.Areas.Admin.Controllers
         // POST: Admin/TaiKhoan/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(string matKhau, string matKhauMoi, string xacNhanMatKhau, string tenTK)
+        public ActionResult ChangePassword(string matKhau, string matKhauMoi, string xacNhanMatKhau, string tenTK, string soDienThoai, string email)
         {
             var nhanVien = Session["AdminUser"] as NhanVien;
             if (nhanVien == null) return RedirectToAction("Index", "Login", new { Area = "Admin" });
@@ -50,14 +61,17 @@ namespace banSach.Areas.Admin.Controllers
 
             dbNhanVien.MatKhau = matKhauMoi;
             dbNhanVien.TenTK = tenTK;
+            dbNhanVien.SoDienThoai = soDienThoai;
+            dbNhanVien.Email = email;
+
             db.SaveChanges();
 
             FormsAuthentication.SetAuthCookie(tenTK, false);
             Session["AdminUser"] = dbNhanVien;
+
             TempData["Message"] = "Cập nhật thành công!";
             return RedirectToAction("Index");
         }
-
 
     }
 

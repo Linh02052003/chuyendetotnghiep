@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "D:\\chuyendetotnghiep\\banSach\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\views\\giohang\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\views\\giohang\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\views\\taikhoan\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\taikhoan\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\areas\\admin\\controllers\\dondathangscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\controllers\\dondathangscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|d:\\chuyendetotnghiep\\bansach\\bansach\\areas\\admin\\views\\dondathangs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\dondathangs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\areas\\admin\\controllers\\chucvuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\controllers\\chucvuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\areas\\admin\\views\\chucvus\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\chucvus\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\areas\\admin\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|D:\\chuyendetotnghiep\\banSach\\bansach\\areas\\admin\\views\\dondathangs\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CBE1BEF-1D5B-4B6E-A11A-D0B467109993}|banSach\\banSach.csproj|solutionrelative:bansach\\areas\\admin\\views\\dondathangs\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +42,107 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Checkout.cshtml",
-              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\GioHang\\Checkout.cshtml",
-              "RelativeDocumentMoniker": "banSach\\Views\\GioHang\\Checkout.cshtml",
-              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Views\\GioHang\\Checkout.cshtml*",
-              "RelativeToolTip": "banSach\\Views\\GioHang\\Checkout.cshtml*",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADkAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-17T03:49:07.231Z",
+              "DocumentIndex": 1,
+              "Title": "TaiKhoanController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\TaiKhoanController.cs",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Controllers\\TaiKhoanController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\TaiKhoanController.cs",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Controllers\\TaiKhoanController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T02:37:02.375Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\TaiKhoan\\Index.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\TaiKhoan\\Index.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\TaiKhoan\\Index.cshtml",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\TaiKhoan\\Index.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB0AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-25T02:36:17.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\ChucVus\\Details.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\ChucVus\\Details.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\ChucVus\\Details.cshtml",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\ChucVus\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-24T15:48:40.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\DonDatHangs\\Details.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\DonDatHangs\\Details.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\DonDatHangs\\Details.cshtml",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\DonDatHangs\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-24T15:48:35.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\DonDatHangs\\Create.cshtml",
+              "ViewState": "AgIAADQBAAAAAAAAAAAswEwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-24T15:46:28.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChucVusController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Controllers\\ChucVusController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwFMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T15:44:46.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DonDatHangsController.cs",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Controllers\\DonDatHangsController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAA7wJAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T15:40:43.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_LayoutAdmin.cshtml",
+              "DocumentMoniker": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeDocumentMoniker": "banSach\\Areas\\Admin\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ToolTip": "D:\\chuyendetotnghiep\\banSach\\banSach\\Areas\\Admin\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeToolTip": "banSach\\Areas\\Admin\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAEAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-24T15:50:22.903Z"
             }
           ]
         }

@@ -47,21 +47,24 @@
 
     </tbody>
 </table>
-<div class="row mb-3 align-items-center">
-    <div class="col-sm-3">
-        <label for="PhuongThucThanhToan" class="col-form-label fw-bold">Phương thức thanh toán</label>
+@using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post))
+{
+    <div class="row mb-3 align-items-center">
+        <div class="col-sm-3">
+            <label for="PhuongThucThanhToan" class="col-form-label fw-bold">Phương thức thanh toán</label>
+        </div>
+        <div class="col-sm-9">
+            @Html.DropDownList("PhuongThucThanhToan", new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Thanh toán tiền mặt", Value = "1" },
+                    new SelectListItem { Text = "Chuyển khoản", Value = "2" }
+                }, "Value", "Text"), "-- Chọn phương thức thanh toán --", new { @class = "form-control form-control-lg", id = "PhuongThucThanhToan" })
+        </div>
     </div>
-    <div class="col-sm-9">
-        @Html.DropDownList("PhuongThucThanhToan", new SelectList(
-            new List<SelectListItem>
-            {
-                new SelectListItem { Text = "Thanh toán tiền mặt", Value = "1" },
-                new SelectListItem { Text = "Chuyển khoản", Value = "2" }
-            }, "Value", "Text"), "-- Chọn phương thức thanh toán --", new { @class = "form-control form-control-lg", id = "PhuongThucThanhToan" })
-    </div>
-</div>
 
-<div class="text-right mt-3">
-    <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary">Quay lại giỏ hàng</a>
-    <a href="@Url.Action("DatHang", "Other")" class="btn btn-primary">Xác nhận đặt hàng</a>
-</div>
+    <div class="text-right mt-3">
+        <a href="@Url.Action("Index", "GioHang")" class="btn btn-secondary">Quay lại giỏ hàng</a>
+        <button type="submit" class="btn btn-primary">Xác nhận đặt hàng</button>
+    </div>
+}

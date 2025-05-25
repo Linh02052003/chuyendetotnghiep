@@ -27,7 +27,7 @@
 
     <div class="container-fluid px-4">
         <br />
-        <h2>Cập nhật Tên Đăng Nhập và Mật Khẩu</h2>
+        <h2>Quản lý tài khoản</h2>
 
         <div class="card mb-4">
             <div class="card-body">
@@ -36,9 +36,13 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-group">
-                        <label for="TenTaiKhoan">Tên tài khoản</label>
-                        @Html.TextBoxFor(model => model.TenTK, new { @class = "form-control", id = "TenTaiKhoan", placeholder = "Nhập tên tài khoản" })
-                        @Html.ValidationMessageFor(model => model.TenTK, "", new { @class = "text-danger" })
+                        <label for="SoDienThoai">Số điện thoại</label>
+                        <input type="text" name="soDienThoai" class="form-control" id="SoDienThoai" value="@Model.SoDienThoai" placeholder="Nhập số điện thoại mới" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" name="email" class="form-control" id="Email" value="@Model.Email" placeholder="Nhập email mới" />
                     </div>
 
                     <div class="form-group">

@@ -93,38 +93,42 @@
     }
 </div>
 
+
 <div class="row">
     @foreach (var sach in Model)
     {
         <div class="col-xl-3 col-lg-4 col-md-4 col-12">
             <div class="single-product">
                 <div class="product-img">
-                    <a>
-                        <img class="default-img" src="~/img/sach/@sach.Hinh" alt="#">
-                        <img class="hover-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach">
+                    <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })">
+                        <div class="image-frame-product">
+                            <img class="default-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach">
+                            <img class="hover-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach">
+                        </div>
                     </a>
                     <div class="button-head">
                         <div class="product-action">
-                            <a data-toggle="modal" data-target="#exampleModal" title="Xem thông tin" href="@Url.Action("Details", "Book", new {id=sach.MaSach})"><i class="bx bx-show"></i><span>Xem nhanh</span></a>
+                            <a data-toggle="modal" data-target="#exampleModal" title="Xem thông tin" href="@Url.Action("Details", "Book", new { id = sach.MaSach })">
+                                <i class="bx bx-show"></i><span>Xem nhanh</span>
+                            </a>
                         </div>
                         <div class="product-action-2">
-                            @if (@sach.SoLuongTon != 0 && @sach.SoLuongTon != null)
-                            {
-                                <a href="@Url.Action("ThemGiohang","GioHang", new {@iMasach=@sach.MaSach,@strURL=Request.Url.ToString()})">Thêm vào giỏ</a>
-                            }
+                            <a href="@Url.Action("ThemGiohang", "GioHang", new { iMasach = sach.MaSach, strURL = Request.Url.ToString() })">Thêm vào giỏ</a>
                         </div>
                     </div>
                 </div>
-                <div class="product-content text-center">
-                    <h3><a href="@Url.Action("Details", "Book", new {id=sach.MaSach})">@sach.TenSach</a></h3>
+                <div class="product-content">
+                    <h3>
+                        <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })" class="product-title">@sach.TenSach</a>
+                    </h3>
                     <div class="product-price">
-                        @if (@sach.SoLuongTon != 0 && @sach.SoLuongTon != null)
+                        @if (sach.SoLuongTon != 0 && sach.SoLuongTon != null)
                         {
-                            <span>@String.Format("{0:#,##0}", @sach.GiaBan)</span><span> VNĐ</span>
+                            <span class="price">@String.Format("{0:#,##0}", sach.GiaBan) VNĐ</span>
                         }
                         else
                         {
-                            <span>Hết Hàng</span>
+                            <span class="out-of-stock">Hết Hàng</span>
                         }
                     </div>
                 </div>
@@ -132,6 +136,173 @@
         </div>
     }
 </div>
+
+
+<style>
+    .hero-slider {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 40px; /* Khoảng cách giữa slide và sách */
+    }
+
+    .carousel-item {
+        height: 500px; /* Chiều cao cố định cho carousel */
+        display: flex; /* Sử dụng flexbox để căn giữa */
+        justify-content: center; /* Căn giữa ngang */
+        align-items: center; /* Căn giữa dọc */
+    }
+
+    .image-frame {
+        width: 100%;
+        max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+        height: 100%;
+        border: 2px solid #e5e5e5; /* Khung viền đồng đều */
+        border-radius: 8px; /* Bo góc */
+        overflow: hidden; /* Ẩn phần thừa của hình ảnh */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff; /* Nền trắng cho khung */
+    }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung */
+            object-position: center; /* Căn giữa nội dung hình ảnh */
+            display: block;
+        }
+
+    .carousel-indicators [data-bs-target] {
+        background-color: #fff;
+        opacity: 0.7;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .carousel-indicators .active {
+        background-color: #ff5e57;
+        opacity: 1;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    .category-section .category-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        margin: 0; /* Xóa toàn bộ margin */
+        padding: 0 0 5px 0; /* Khoảng cách 0,5cm (5px) với card sách */
+        text-align: left; /* Căn trái */
+    }
+
+    .category-section .row {
+        margin-top: 0; /* Xóa margin-top của row để sát vào tên loại */
+    }
+
+    .single-product {
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        background-color: #fff; /* Nền trắng cho card */
+        min-height: 350px; /* Chiều cao tối thiểu để đồng đều */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .single-product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .product-img {
+        display: flex; /* Sử dụng flexbox để căn giữa */
+        justify-content: center; /* Căn giữa ngang */
+        align-items: center; /* Căn giữa dọc */
+        padding: 10px; /* Khoảng đệm đồng đều */
+        background-color: #f8f8f8; /* Nền khung đồng đều với carousel */
+    }
+
+    .image-frame-product {
+        width: 100%;
+        height: 200px; /* Chiều cao cố định cho khung sản phẩm */
+        /*border: 2px solid #e5e5e5;*/ /* Khung viền đồng đều với carousel */
+        /*border-radius: 8px;*/ /* Bo góc đồng đều */
+        /*overflow: hidden;*/ /* Ẩn phần thừa của hình ảnh */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        padding: 5px; /* Khoảng đệm nhỏ hơn cho sản phẩm */
+    }
+
+        .image-frame-product img {
+            width: 100%; /* Đảm bảo hình ảnh lấp đầy khung */
+            height: 100%;
+            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung */
+            object-position: center; /* Căn giữa nội dung hình ảnh */
+            display: block;
+        }
+
+    .product-content {
+        padding: 15px;
+        flex-grow: 1; /* Đảm bảo nội dung mở rộng để lấp đầy không gian */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 120px; /* Chiều cao tối thiểu để đồng đều */
+    }
+
+    .product-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.4; /* Khoảng cách dòng đồng đều */
+        margin-bottom: 10px; /* Khoảng cách với giá */
+        text-align: center;
+    }
+
+    .product-price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 30px; /* Đảm bảo giá có không gian cố định */
+    }
+
+        .product-price .price {
+            font-size: 18px;
+            color: #ff5e57;
+            font-weight: bold;
+        }
+
+        .product-price .out-of-stock {
+            font-size: 18px; /* Đồng bộ với giá */
+            color: #ff5e57; /* Đồng bộ màu với giá */
+            font-weight: bold;
+        }
+</style>
+
+
 <style>
     .icon {
         font-weight: bold;

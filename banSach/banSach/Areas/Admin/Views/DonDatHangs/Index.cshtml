@@ -60,20 +60,39 @@
                                 <td>@Html.DisplayFor(modelItem => item.DiaChi)</td>
                                 <td>@(item.NgayDat?.ToString("dd/MM/yyyy") ?? "")</td>
                                 <td>
-                                    @using (Html.BeginForm("CapNhatTrangThai", "DonDatHangs", FormMethod.Post, new { @class = "d-flex" }))
+                                @if (item.TrangThai == "Chờ xác nhận" || item.TrangThai == "Đang giao hàng")
+                                {
+                                    using (Html.BeginForm("CapNhatTrangThai", "DonDatHangs", FormMethod.Post, new { @class = "d-flex" }))
                                     {
                                         @Html.Hidden("maDonHang", item.MaDonHang)
 
-                                        @Html.DropDownList(
-                                                                          "trangThai",
-                                                                          new SelectList(new List<string> { "Đã thanh toán", "Chờ xác nhận", "Đang giao hàng", "Hoàn tất", "Đã huỷ" }, item.TrangThai),
-                                                                          new { @class = "form-select form-select-sm me-2" }
-                                                                      )
+                                        if (item.TrangThai == "Chờ xác nhận")
+                                        {
+                                            @Html.DropDownList(
+                                                          "trangThai",
+                                                          new SelectList(new List<string> { "Chờ xác nhận", "Đang giao hàng" }, item.TrangThai),
+                                                          new { @class = "form-select form-select-sm me-2", style = "color: red;" }
+                                                      )
+                                        }
+                                        else if (item.TrangThai == "Đang giao hàng")
+                                        {
+                                            @Html.DropDownList(
+                                                          "trangThai",
+                                                          new SelectList(new List<string> { "Đang giao hàng", "Hoàn tất" }, item.TrangThai),
+                                                          new { @class = "form-select form-select-sm me-2", style = "color: red;" }
+                                                      )
+                                        }
 
                                         <button type="submit" class="btn btn-sm btn-outline-primary">✔</button>
                                     }
+                                }
+                                else
+                                {
+                                    <span style="color: green;">@item.TrangThai</span>
+                                }
                                 </td>
-                                <td>@totalAmount.ToString("N0")</td> <!-- Format as currency or number -->
+                                <td>@totalAmount.ToString("N0")</td>
+ <!-- Format as currency or number -->
                                 <td>
                                     <div class="d-flex">
                                         <div class="ms-2"></div>

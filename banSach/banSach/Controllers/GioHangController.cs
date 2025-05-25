@@ -3,6 +3,9 @@ using banSach.Helper;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using banSach.Other;
+using System.Configuration;
+using System.Collections.Generic;
 
 namespace banSach.Controllers
 {
@@ -36,7 +39,7 @@ namespace banSach.Controllers
 
             // Eager load the cart items and their associated books
             gioHang = db.GioHangs
-                .Include("ChiTietGioHangs.Sach") // Include navigation properties
+                .Include("ChiTietGioHangs.Sach")
                 .FirstOrDefault(g => g.MaKH == maKH);
 
             return View(gioHang);
@@ -186,7 +189,6 @@ namespace banSach.Controllers
             }
         }
 
-
         public ActionResult Checkout()
         {
             var maKH = Session["MaKH"]?.ToString();
@@ -208,7 +210,7 @@ namespace banSach.Controllers
             return View(gioHang.ChiTietGioHangs.ToList());
         }
 
-        public ActionResult DatHang()
+        public ActionResult DatHang(string PhuongThucThanhToan)
         {
             var maKH = Session["MaKH"]?.ToString();
             if (string.IsNullOrEmpty(maKH))
@@ -233,86 +235,297 @@ namespace banSach.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            // Tạo đơn đặt hàng
-            var donHang = new DonDatHang
+            if (PhuongThucThanhToan == "1") // Thanh toán tiền mặt
             {
-                MaDonHang = Guid.NewGuid().ToString(),
-                HoTen = khachHang.HoTen,
-                SoDienThoai = khachHang.SoDienThoai,
-                Email = khachHang.Email,
-                DiaChi = khachHang.DiaChi,
-                NgayDat = DateTime.Now,
-                TrangThai = "Chờ xác nhận",
-                PhuongThucThanhToan = 1
-            };
-            db.DonDatHangs.Add(donHang);
-
-            decimal tongTien = 0;
-            string emailBody = $"<div style='color: black;'>" +
-                $"<p>Chào {donHang.HoTen},</p>" +
-                $"<p>Bạn đã đặt hàng thành công vào lúc {donHang.NgayDat:HH:mm:ss dd/MM/yyyy}.</p>" +
-                $"<p>Mã đơn hàng của bạn là: <strong>{donHang.MaDonHang}</strong></p>" +
-                "<p>Chi tiết đơn hàng:</p>" +
-                "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; width: 100%;'>" +
-                "<thead><tr>" +
-                "<th style='text-align:left;'>Tên sách</th>" +
-                "<th>Số lượng</th>" +
-                "<th>Đơn giá</th>" +
-                "<th>Thành tiền</th>" +
-                "</tr></thead><tbody>";
-
-            foreach (var item in gioHang.ChiTietGioHangs)
-            {
-                var sach = db.Saches.Find(item.MaSach);
-                if (sach != null)
+                // Original logic: Process order immediately
+                var donHang = new DonDatHang
                 {
-                    var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
-                    tongTien += thanhTien;
+                    MaDonHang = Guid.NewGuid().ToString(),
+                    HoTen = khachHang.HoTen,
+                    SoDienThoai = khachHang.SoDienThoai,
+                    Email = khachHang.Email,
+                    DiaChi = khachHang.DiaChi,
+                    NgayDat = DateTime.Now,
+                    TrangThai = "Chờ xác nhận"
+                };
+                db.DonDatHangs.Add(donHang);
 
-                    emailBody += $"<tr>" +
-                                 $"<td>{sach.TenSach}</td>" +
-                                 $"<td style='text-align:center;'>{item.SoLuong}</td>" +
-                                 $"<td style='text-align:right;'>{item.DonGia:N0}₫</td>" +
-                                 $"<td style='text-align:right;'>{thanhTien:N0}₫</td>" +
-                                 "</tr>";
+                decimal tongTien = 0;
+                string emailBody = $"<div style='color: black;'>" +
+                    $"<p>Chào {donHang.HoTen},</p>" +
+                    $"<p>Bạn đã đặt hàng thành công vào lúc {donHang.NgayDat:HH:mm:ss dd/MM/yyyy}.</p>" +
+                    $"<p>Mã đơn hàng của bạn là: <strong>{donHang.MaDonHang}</strong></p>" +
+                    "<p>Chi tiết đơn hàng:</p>" +
+                    "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; width: 100%;'>" +
+                    "<thead><tr>" +
+                    "<th style='text-align:left;'>Tên sách</th>" +
+                    "<th>Số lượng</th>" +
+                    "<th>Đơn giá</th>" +
+                    "<th>Thành tiền</th>" +
+                    "</tr></thead><tbody>";
 
-                    // Trừ tồn kho
-                    sach.SoLuongTon -= item.SoLuong ?? 0;
+                foreach (var item in gioHang.ChiTietGioHangs)
+                {
+                    var sach = db.Saches.Find(item.MaSach);
+                    if (sach != null)
+                    {
+                        var thanhTien = (item.SoLuong ?? 0) * (item.DonGia ?? 0);
+                        tongTien += thanhTien;
+
+                        emailBody += $"<tr>" +
+                                     $"<td>{sach.TenSach}</td>" +
+                                     $"<td style='text-align:center;'>{item.SoLuong}</td>" +
+                                     $"<td style='text-align:right;'>{item.DonGia:N0}₫</td>" +
+                                     $"<td style='text-align:right;'>{thanhTien:N0}₫</td>" +
+                                     "</tr>";
+
+                        sach.SoLuongTon -= item.SoLuong ?? 0;
+                    }
+
+                    var chiTiet = new ChiTietDonHang
+                    {
+                        MaDonHang = donHang.MaDonHang,
+                        MaSach = item.MaSach,
+                        SoLuong = item.SoLuong,
+                        DonGia = item.DonGia
+                    };
+                    db.ChiTietDonHangs.Add(chiTiet);
                 }
 
-                var chiTiet = new ChiTietDonHang
-                {
-                    MaDonHang = donHang.MaDonHang,
-                    MaSach = item.MaSach,
-                    SoLuong = item.SoLuong,
-                    DonGia = item.DonGia
-                };
-                db.ChiTietDonHangs.Add(chiTiet);
+                emailBody += $"<tr>" +
+                             $"<td colspan='3' style='text-align:right; font-weight:bold;'>Tổng cộng:</td>" +
+                             $"<td style='text-align:right; font-weight:bold;'>{tongTien:N0}₫</td>" +
+                             $"</tr></tbody></table>" +
+                             "<p><strong>Cảm ơn quý khách đã mua hàng tại cửa hàng Sách Trực Tuyến!</strong></p>" +
+                             "<p>Hotline hỗ trợ: <strong>+060 (800) 801-582</strong></p>" +
+                             "<p><em>Trân trọng,</em><br/>HT STORE</p>" +
+                             "</div>";
+
+                db.ChiTietGioHangs.RemoveRange(gioHang.ChiTietGioHangs);
+                db.GioHangs.Remove(gioHang);
+                db.SaveChanges();
+
+                SendMail sendMail = new SendMail();
+                sendMail.SendMailFunction(khachHang.Email, "Xác nhận đơn hàng từ Cửa hàng sách HT STORE", emailBody);
+
+                TempData["Success"] = "Đặt hàng thành công!";
+                Session["cart"] = null;
+                Session["tongTienMua"] = null;
+
+                return RedirectToAction("Index", "Home");
             }
+            else if (PhuongThucThanhToan == "2") // Chuyển khoản (VNPay)
+            {
+                // Store order details in session without new models
+                var orderDetails = new Dictionary<string, object>
+                {
+                    { "MaKH", maKH },
+                    { "HoTen", khachHang.HoTen },
+                    { "SoDienThoai", khachHang.SoDienThoai },
+                    { "Email", khachHang.Email },
+                    { "DiaChi", khachHang.DiaChi },
+                    { "TotalAmount", gioHang.ChiTietGioHangs.Sum(item => (item.SoLuong ?? 0) * (item.DonGia ?? 0)) }
+                };
 
-            emailBody += $"<tr>" +
-                         $"<td colspan='3' style='text-align:right; font-weight:bold;'>Tổng cộng:</td>" +
-                         $"<td style='text-align:right; font-weight:bold;'>{tongTien:N0}₫</td>" +
-                         $"</tr></tbody></table>" +
-                         "<p><strong>Cảm ơn quý khách đã mua hàng tại cửa hàng Sách Trực Tuyến!</strong></p>" +
-                         "<p>Hotline hỗ trợ: <strong>+060 (800) 801-582</strong></p>" +
-                         "<p><em>Trân trọng,</em><br/>HT STORE</p>" +
-                         "</div>";
+                var cartItems = gioHang.ChiTietGioHangs.Select(item => new Dictionary<string, object>
+                {
+                    { "MaSach", item.MaSach },
+                    { "SoLuong", item.SoLuong },
+                    { "DonGia", item.DonGia }
+                }).ToList();
 
-            // Xóa giỏ hàng
-            db.ChiTietGioHangs.RemoveRange(gioHang.ChiTietGioHangs);
-            db.GioHangs.Remove(gioHang);
+                orderDetails["CartItems"] = cartItems;
 
-            db.SaveChanges();
+                // Store in session
+                Session["PendingOrder"] = orderDetails;
 
-            // Gửi email
-            SendMail sendMail = new SendMail();
-            sendMail.SendMailFunction(khachHang.Email, "Xác nhận đơn hàng từ Cửa hàng sách HT STORE", emailBody);
+                // VNPay payment setup
+                string url = ConfigurationManager.AppSettings["Url"];
+                string returnUrl = ConfigurationManager.AppSettings["ReturnUrl"];
+                string tmnCode = ConfigurationManager.AppSettings["TmnCode"];
+                string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
 
-            TempData["Success"] = "Đặt hàng thành công!";
-            return RedirectToAction("Index", "GioHang");
+                PayLib pay = new PayLib();
+                pay.AddRequestData("vnp_Version", "2.1.0");
+                pay.AddRequestData("vnp_Command", "pay");
+                pay.AddRequestData("vnp_TmnCode", tmnCode);
+                pay.AddRequestData("vnp_Amount", (Convert.ToDecimal(orderDetails["TotalAmount"]) * 100).ToString("F0"));
+                pay.AddRequestData("vnp_BankCode", "");
+                pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                pay.AddRequestData("vnp_CurrCode", "VND");
+                pay.AddRequestData("vnp_IpAddr", Util.GetIpAddress());
+                pay.AddRequestData("vnp_Locale", "vn");
+                pay.AddRequestData("vnp_OrderInfo", $"Thanh toan don hang cho KH {maKH}");
+                pay.AddRequestData("vnp_OrderType", "other");
+                pay.AddRequestData("vnp_ReturnUrl", returnUrl);
+                pay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString());
+
+                string paymentUrl = pay.CreateRequestUrl(url, hashSecret);
+                return Redirect(paymentUrl);
+            }
+            else
+            {
+                TempData["Error"] = "Vui lòng chọn phương thức thanh toán.";
+                return RedirectToAction("Index");
+            }
         }
 
+        public ActionResult PaymentConfirm()
+        {
+            if (Request.QueryString.Count > 0)
+            {
+                string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
+                var vnpayData = Request.QueryString;
+                PayLib pay = new PayLib();
+
+                foreach (string s in vnpayData)
+                {
+                    if (!string.IsNullOrEmpty(s) && s.StartsWith("vnp_"))
+                    {
+                        pay.AddResponseData(s, vnpayData[s]);
+                    }
+                }
+
+                long orderId = Convert.ToInt64(pay.GetResponseData("vnp_TxnRef"));
+                long vnpayTranId = Convert.ToInt64(pay.GetResponseData("vnp_TransactionNo"));
+                string vnp_ResponseCode = pay.GetResponseData("vnp_ResponseCode");
+                string vnp_SecureHash = Request.QueryString["vnp_SecureHash"];
+
+                bool checkSignature = pay.ValidateSignature(vnp_SecureHash, hashSecret);
+
+                if (checkSignature && vnp_ResponseCode == "00")
+                {
+                    // Payment successful, process the order
+                    var orderDetails = Session["PendingOrder"] as Dictionary<string, object>;
+                    if (orderDetails == null)
+                    {
+                        ViewBag.Message = "Không tìm thấy thông tin đơn hàng.";
+                        return View();
+                    }
+
+                    // Extract customer details
+                    string maKH = orderDetails["MaKH"]?.ToString();
+                    string hoTen = orderDetails["HoTen"]?.ToString();
+                    string soDienThoai = orderDetails["SoDienThoai"]?.ToString();
+                    string email = orderDetails["Email"]?.ToString();
+                    string diaChi = orderDetails["DiaChi"]?.ToString();
+                    var cartItems = orderDetails["CartItems"] as List<Dictionary<string, object>>;
+
+                    if (string.IsNullOrEmpty(maKH) || cartItems == null || !cartItems.Any())
+                    {
+                        ViewBag.Message = "Thông tin đơn hàng không hợp lệ.";
+                        return View();
+                    }
+
+                    // Create order
+                    var donHang = new DonDatHang
+                    {
+                        MaDonHang = Guid.NewGuid().ToString(),
+                        HoTen = hoTen,
+                        SoDienThoai = soDienThoai,
+                        Email = email,
+                        DiaChi = diaChi,
+                        NgayDat = DateTime.Now,
+                        TrangThai = "Chờ xác nhận"
+                    };
+                    db.DonDatHangs.Add(donHang);
+
+                    decimal tongTien = 0;
+                    string emailBody = $"<div style='color: black;'>" +
+                        $"<p>Chào {donHang.HoTen},</p>" +
+                        $"<p>Bạn đã đặt hàng thành công vào lúc {donHang.NgayDat:HH:mm:ss dd/MM/yyyy}.</p>" +
+                        $"<p>Mã đơn hàng của bạn là: <strong>{donHang.MaDonHang}</strong></p>" +
+                        "<p>Chi tiết đơn hàng:</p>" +
+                        "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; width: 100%;'>" +
+                        "<thead><tr>" +
+                        "<th style='text-align:left;'>Tên sách</th>" +
+                        "<th>Số lượng</th>" +
+                        "<th>Đơn giá</th>" +
+                        "<th>Thành tiền</th>" +
+                        "</tr></thead><tbody>";
+
+                    foreach (var item in cartItems)
+                    {
+                        string maSach = item["MaSach"]?.ToString();
+                        int? soLuong = item["SoLuong"] as int?;
+                        decimal? donGia = item["DonGia"] as decimal?;
+
+                        var sach = db.Saches.Find(maSach);
+                        if (sach != null)
+                        {
+                            var thanhTien = (soLuong ?? 0) * (donGia ?? 0);
+                            tongTien += thanhTien;
+
+                            emailBody += $"<tr>" +
+                                         $"<td>{sach.TenSach}</td>" +
+                                         $"<td style='text-align:center;'>{soLuong}</td>" +
+                                         $"<td style='text-align:right;'>{donGia:N0}₫</td>" +
+                                         $"<td style='text-align:right;'>{thanhTien:N0}₫</td>" +
+                                         "</tr>";
+
+                            sach.SoLuongTon -= soLuong ?? 0;
+                        }
+
+                        var chiTiet = new ChiTietDonHang
+                        {
+                            MaDonHang = donHang.MaDonHang,
+                            MaSach = maSach,
+                            SoLuong = soLuong,
+                            DonGia = donGia
+                        };
+                        db.ChiTietDonHangs.Add(chiTiet);
+                    }
+
+                    emailBody += $"<tr>" +
+                                 $"<td colspan='3' style='text-align:right; font-weight:bold;'>Tổng cộng:</td>" +
+                                 $"<td style='text-align:right; font-weight:bold;'>{tongTien:N0}₫</td>" +
+                                 $"</tr></tbody></table>" +
+                                 "<p><strong>Cảm ơn quý khách đã mua hàng tại cửa hàng Sách Trực Tuyến!</strong></p>" +
+                                  "<p>Hotline hỗ trợ: <strong>+060 (800) 801-582</strong></p>" +
+                                 "<p><em>Trân trọng,</em><br/>HT STORE</p>" +
+                                 "</div>";
+
+                    // Clear cart
+                    var gioHang = db.GioHangs
+                                   .Include("ChiTietGioHangs")
+                                   .FirstOrDefault(g => g.MaKH == maKH);
+                    if (gioHang != null)
+                    {
+                        db.ChiTietGioHangs.RemoveRange(gioHang.ChiTietGioHangs);
+                        db.GioHangs.Remove(gioHang);
+                    }
+
+                    db.SaveChanges();
+
+                    // Send email
+                    SendMail sendMail = new SendMail();
+                    sendMail.SendMailFunction(email, "Xác nhận đơn hàng từ Cửa hàng sách HT STORE", emailBody);
+
+                    // Clear session
+                    Session["PendingOrder"] = null;
+                    Session["cart"] = null;
+                    Session["tongTienMua"] = null;
+
+                    ViewBag.Message = $"Thanh toán thành công hóa đơn {orderId} | Mã giao dịch: {vnpayTranId}";
+                    TempData["Success"] = "Đặt hàng thành công!";
+                }
+                else
+                {
+                    // Payment failed
+                    ViewBag.Message = checkSignature
+                        ? $"Có lỗi xảy ra trong quá trình xử lý hóa đơn {orderId} | Mã giao dịch: {vnpayTranId} | Mã lỗi: {vnp_ResponseCode}"
+                        : "Có lỗi xảy ra trong quá trình xử lý";
+                    TempData["Error"] = ViewBag.Message;
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Không có thông tin thanh toán.";
+                TempData["Error"] = ViewBag.Message;
+            }
+
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

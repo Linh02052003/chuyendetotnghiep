@@ -4,175 +4,21 @@
     var loaiList = ViewBag.LoaiList as List<banSach.Models.Loai>;
 }
 
-<style>
-    .custom-toast-wrapper {
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        z-index: 9999;
-    }
-
-    .custom-toast {
-        display: flex;
-        align-items: center;
-        padding: 12px 16px;
-        border-radius: 10px;
-        min-width: 250px;
-        max-width: 350px;
-        color: white;
-        font-size: 14px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        animation: slideIn 0.3s ease;
-        gap: 8px;
-        position: relative;
-    }
-
-    .toast-icon {
-        font-size: 20px;
-        line-height: 1;
-    }
-
-    .toast-message {
-        flex: 1;
-        text-align: left;
-        word-break: break-word;
-    }
-
-    .toast-close {
-        cursor: pointer;
-        font-size: 16px;
-        margin-left: 8px;
-        opacity: 0.8;
-    }
-
-        .toast-close:hover {
-            opacity: 1;
-        }
-
-    .success-toast {
-        background-color: #2ecc40;
-    }
-
-    .error-toast {
-        background-color: #e74c3c;
-    }
-
-    keyframes slideIn {
-        from
-
+<div>
+    @if (TempData["SuccessMessage"] != null)
     {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    }
-</style>
-
-<div class="custom-toast-wrapper">
-    @if (TempData["Success"] != null)
-    {
-        <div class="custom-toast success-toast">
-            <i class="toast-icon fas fa-check-circle"></i>
-            <span class="toast-message">@TempData["Success"]</span>
-            <i class="toast-close fas fa-times" onclick="this.parentElement.remove()"></i>
+        <div class="alert-box success" id="success-alert">
+            <span class="icon">✔</span>
+            <span>@TempData["SuccessMessage"]</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
         </div>
     }
-    @if (TempData["Error"] != null)
+    @if (TempData["ErrorMessage"] != null)
     {
-        <div class="custom-toast error-toast">
-            <i class="toast-icon fas fa-exclamation-circle"></i>
-            <span class="toast-message">@TempData["Error"]</span>
-            <i class="toast-close fas fa-times" onclick="this.parentElement.remove()"></i>
-        </div>
-    }
-</div>
-<style>
-    .custom-toast-wrapper {
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        z-index: 9999;
-    }
-
-    .custom-toast {
-        display: flex;
-        align-items: center;
-        padding: 12px 16px;
-        border-radius: 10px;
-        min-width: 250px;
-        max-width: 350px;
-        color: white;
-        font-size: 14px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        animation: slideIn 0.3s ease;
-        gap: 8px;
-        position: relative;
-    }
-
-    .toast-icon {
-        font-size: 20px;
-        line-height: 1;
-    }
-
-    .toast-message {
-        flex: 1;
-        text-align: left;
-        word-break: break-word;
-    }
-
-    .toast-close {
-        cursor: pointer;
-        font-size: 16px;
-        margin-left: 8px;
-        opacity: 0.8;
-    }
-
-        .toast-close:hover {
-            opacity: 1;
-        }
-
-    .success-toast {
-        background-color: #2ecc40;
-    }
-
-    .error-toast {
-        background-color: #e74c3c;
-    }
-
-    keyframes slideIn {
-        from
-
-    {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    }
-</style>
-
-<div class="custom-toast-wrapper">
-    @if (TempData["Success"] != null)
-    {
-        <div class="custom-toast success-toast">
-            <i class="toast-icon fas fa-check-circle"></i>
-            <span class="toast-message">@TempData["Success"]</span>
-            <i class="toast-close fas fa-times" onclick="this.parentElement.remove()"></i>
-        </div>
-    }
-    @if (TempData["Error"] != null)
-    {
-        <div class="custom-toast error-toast">
-            <i class="toast-icon fas fa-exclamation-circle"></i>
-            <span class="toast-message">@TempData["Error"]</span>
-            <i class="toast-close fas fa-times" onclick="this.parentElement.remove()"></i>
+        <div class="alert-box error" id="error-alert">
+            <span class="icon">✖</span>
+            <span>@TempData["ErrorMessage"]</span>
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">×</button>
         </div>
     }
 </div>
@@ -190,15 +36,21 @@
         <div class="carousel-inner">
             <!-- Slide 1 -->
             <div class="carousel-item active">
-                <img src="@Url.Content("~/img/uudai.png")" class="d-block w-100" alt="Slide 1">
+                <div class="image-frame">
+                    <img src="@Url.Content("~/img/uudai.png")" class="d-block" alt="Slide 1">
+                </div>
             </div>
             <!-- Slide 2 -->
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1498&auto=format&fit=crop" class="d-block w-100" alt="Slide 2">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1498&auto=format&fit=crop" class="d-block" alt="Slide 2">
+                </div>
             </div>
             <!-- Slide 3 -->
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1487&auto=format&fit=crop" class="d-block w-100" alt="Slide 3">
+                <div class="image-frame">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1487&auto=format&fit=crop" class="d-block" alt="Slide 3">
+                </div>
             </div>
         </div>
 
@@ -231,9 +83,11 @@
                     <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                         <div class="single-product">
                             <div class="product-img">
-                                <a href="@Url.Action("Details", "Book", new { id = sach.MaSach })">
-                                    <img class="default-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach" style="width: 100%; height: 200px; object-fit: cover;">
-                                    <img class="hover-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach" style="width: 100%; height: 200px; object-fit: cover;">
+                                <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })">
+                                    <div class="image-frame-product">
+                                        <img class="default-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach">
+                                        <img class="hover-img" src="~/img/sach/@sach.Hinh" alt="@sach.TenSach">
+                                    </div>
                                 </a>
                                 <div class="button-head">
                                     <div class="product-action">
@@ -246,9 +100,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-content text-center">
+                            <div class="product-content">
                                 <h3>
-                                    <a href="@Url.Action("Details", "Book", new { id = sach.MaSach })" class="product-title">@sach.TenSach</a>
+                                    <a href="@Url.Action("Details", "BookStore", new { id = sach.MaSach })" class="product-title">@sach.TenSach</a>
                                 </h3>
                                 <div class="product-price">
                                     @if (sach.SoLuongTon != 0 && sach.SoLuongTon != null)
@@ -286,13 +140,31 @@
     }
 
     .carousel-item {
-        height: 500px; /* Điều chỉnh chiều cao slider */
+        height: 500px; /* Chiều cao cố định cho carousel */
+        display: flex; /* Sử dụng flexbox để căn giữa */
+        justify-content: center; /* Căn giữa ngang */
+        align-items: center; /* Căn giữa dọc */
     }
 
-        .carousel-item img {
+    .image-frame {
+        width: 100%;
+        max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+        height: 100%;
+        border: 2px solid #e5e5e5; /* Khung viền đồng đều */
+        border-radius: 8px; /* Bo góc */
+        overflow: hidden; /* Ẩn phần thừa của hình ảnh */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff; /* Nền trắng cho khung */
+    }
+
+        .image-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung */
+            object-position: center; /* Căn giữa nội dung hình ảnh */
+            display: block;
         }
 
     .carousel-indicators [data-bs-target] {
@@ -339,6 +211,11 @@
         border-radius: 8px;
         overflow: hidden;
         transition: transform 0.3s ease;
+        background-color: #fff; /* Nền trắng cho card */
+        min-height: 350px; /* Chiều cao tối thiểu để đồng đều */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
         .single-product:hover {
@@ -346,14 +223,42 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-    .product-img img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
+    .product-img {
+        display: flex; /* Sử dụng flexbox để căn giữa */
+        justify-content: center; /* Căn giữa ngang */
+        align-items: center; /* Căn giữa dọc */
+        padding: 10px; /* Khoảng đệm đồng đều */
+        background-color: #f8f8f8; /* Nền khung đồng đều với carousel */
     }
+
+    .image-frame-product {
+        width: 100%;
+        height: 200px; /* Chiều cao cố định cho khung sản phẩm */
+        /*border: 2px solid #e5e5e5;*/ /* Khung viền đồng đều với carousel */
+        /*border-radius: 8px;*/ /* Bo góc đồng đều */
+        /*overflow: hidden;*/ /* Ẩn phần thừa của hình ảnh */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;  
+        padding: 5px; /* Khoảng đệm nhỏ hơn cho sản phẩm */
+    }
+
+        .image-frame-product img {
+            width: 100%; /* Đảm bảo hình ảnh lấp đầy khung */
+            height: 100%;
+            object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung */
+            object-position: center; /* Căn giữa nội dung hình ảnh */
+            display: block;
+        }
 
     .product-content {
         padding: 15px;
+        flex-grow: 1; /* Đảm bảo nội dung mở rộng để lấp đầy không gian */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 120px; /* Chiều cao tối thiểu để đồng đều */
     }
 
     .product-title {
@@ -365,19 +270,29 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+        line-height: 1.4; /* Khoảng cách dòng đồng đều */
+        margin-bottom: 10px; /* Khoảng cách với giá */
+        text-align: center;
     }
 
-    .product-price .price {
-        font-size: 18px;
-        color: #ff5e57;
-        font-weight: bold;
+    .product-price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 30px; /* Đảm bảo giá có không gian cố định */
     }
 
-    .product-price .out-of-stock {
-        font-size: 16px;
-        color: #999;
-        font-weight: bold;
-    }
+        .product-price .price {
+            font-size: 18px;
+            color: #ff5e57;
+            font-weight: bold;
+        }
+
+        .product-price .out-of-stock {
+            font-size: 18px; /* Đồng bộ với giá */
+            color: #ff5e57; /* Đồng bộ màu với giá */
+            font-weight: bold;
+        }
 </style>
 
 <script>

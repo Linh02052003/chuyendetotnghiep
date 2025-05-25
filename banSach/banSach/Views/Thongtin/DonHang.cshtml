@@ -144,9 +144,9 @@
                     <tr>
                         <td>@item.MaDonHang</td>
                         <td>
-                            @if (item.ChiTietDonHang != null && item.ChiTietDonHang.Any())
+                            @if (item.ChiTietDonHangs != null && item.ChiTietDonHangs.Any())
                             {
-                                foreach (var ct in item.ChiTietDonHang)
+                                foreach (var ct in item.ChiTietDonHangs)
                                 {
                                     if (ct.Sach?.Hinh != null)
                                     {
@@ -161,9 +161,9 @@
                             }
                         </td>
                         <td>
-                            @if (item.ChiTietDonHang != null && item.ChiTietDonHang.Any())
+                            @if (item.ChiTietDonHangs != null && item.ChiTietDonHangs.Any())
                             {
-                                foreach (var ct in item.ChiTietDonHang)
+                                foreach (var ct in item.ChiTietDonHangs)
                                 {
                                     <span class="product-name">@(ct.Sach?.TenSach ?? "Không có tên")</span>
                                 }

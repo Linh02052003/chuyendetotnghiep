@@ -132,6 +132,17 @@ namespace banSach.Areas.Admin.Controllers
         // GET: Admin/DonDatHangs/Details/5
         public ActionResult Details(string id)
         {
+            if (Session["AdminUser"] == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+
+            var user = Session["AdminUser"] as NhanVien;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+            ViewBag.HoTen = user.HoTen;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -147,6 +158,17 @@ namespace banSach.Areas.Admin.Controllers
         // GET: Admin/DonDatHangs/Create
         public ActionResult Create()
         {
+            if (Session["AdminUser"] == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+
+            var user = Session["AdminUser"] as NhanVien;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+            ViewBag.HoTen = user.HoTen;
             // Fetch books with Status = 1
             var sachList = db.Saches
                 .Where(s => s.Status == 1)

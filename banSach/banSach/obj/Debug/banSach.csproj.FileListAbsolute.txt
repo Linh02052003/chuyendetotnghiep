@@ -168,3 +168,15 @@ D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.dll
 D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.Mvc.dll
 D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.xml
 D:\chuyendetotnghiep\banSach\banSach\bin\PagedList.Mvc.xml
+D:\chuyendetotnghiep\banSach\banSach\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\System.Threading.Tasks.Extensions.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Abstractions.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Container.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Mvc.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\WebActivatorEx.dll
+D:\chuyendetotnghiep\banSach\banSach\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\chuyendetotnghiep\banSach\banSach\bin\System.Threading.Tasks.Extensions.xml
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Abstractions.pdb
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Container.pdb
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Mvc.pdb
+D:\chuyendetotnghiep\banSach\banSach\bin\Unity.Mvc.xml
